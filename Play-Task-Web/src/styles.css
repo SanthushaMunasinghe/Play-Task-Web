@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("./assets/fonts/Inter-3.19/Inter Web/inter.css");
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.logo {
+  width: 156px;
+  height: 32px;
+  object-fit: cover;
+}
+
+.button-red {
+  background-color: #ff5252;
+  border-radius: 0;
+}

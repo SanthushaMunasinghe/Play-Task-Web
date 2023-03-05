@@ -1,0 +1,52 @@
+<header>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+    <div class="container-fluid container">
+      <a href="/">
+        <img
+          src="../../../assets/images/Logo-01.png"
+          alt="Logo-01"
+          class="logo"
+        />
+      </a>
+      <div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a
+              *ngFor="let navLink of navLinks; index as i"
+              class="nav-link fw-semibold"
+              [href]="navLink.link"
+            >
+              <span
+                *ngIf="navIndex == i; else elseBlock"
+                class="nav-link active fw-semibold"
+                aria-current="page"
+                href="#"
+                style="color: #ff5252"
+                >{{ navLink.text }}</span
+              >
+              <ng-template #elseBlock
+                ><span
+                  class="nav-link fw-semibold"
+                  href="#"
+                  style="color: black"
+                  >{{ navLink.text }}</span
+                ></ng-template
+              >
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
