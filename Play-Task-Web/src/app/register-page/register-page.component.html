@@ -1,6 +1,6 @@
 <!-- header section -->
 <header>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary shadow">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
     <div class="container">
       <a href="/">
         <img
@@ -10,7 +10,7 @@
         />
       </a>
       <div>
-        <h3 class="fw-bolder">Registration</h3>
+        <h3 class="fw-bolder">Institution Registration</h3>
       </div>
     </div>
   </nav>
@@ -23,72 +23,100 @@
       class="shadow-sm p-5 mt-5 card mx-auto"
       style="border-radius: 0; max-width: 700px"
     >
-      <div class="mb-3">
-        <label class="form-label fw-semibold">Name</label>
-        <input
-          type="text"
-          class="form-control"
-          style="background-color: #d9d9d9; border-radius: 0"
-          placeholder="Name"
-        />
-      </div>
-      <div class="mb-3">
-        <label class="form-label fw-semibold">Type</label>
-        <select
-          class="form-select"
-          style="background-color: #d9d9d9; border-radius: 0"
-          name="dropdown"
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Institution Name</label>
+          <input
+            type="text"
+            maxlength="64"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Type Institution Name"
+            formControlName="name"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Institution Type</label>
+          <select
+            class="form-select"
+            style="background-color: #d9d9d9; border-radius: 0"
+            formControlName="type"
+          >
+            <option *ngFor="let type of types; index as i" [value]="i">
+              {{ type }}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Type Email"
+            formControlName="email"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Contact Number</label>
+          <input
+            type="tel"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Enter Contact Number"
+            maxlength="11"
+            formControlName="contactno"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Location</label>
+          <input
+            type="text"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Enter Location Address"
+            formControlName="location"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Must be 8-16 characters. Must inlucde atleast 1 character and 1 number"
+            maxlength="16"
+            formControlName="password"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Confirm Password"
+            formControlName="confirmedPassword"
+          />
+        </div>
+        <div
+          class="mb-3"
+          *ngFor="let error of registrationErrors"
+          style="background-color: #ff5252"
         >
-          <option selected>Choose...</option>
-          <option value="option1">School</option>
-          <option value="option2">Primary School</option>
-          <option value="option3">Tution</option>
-        </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label fw-semibold">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          style="background-color: #d9d9d9; border-radius: 0"
-          placeholder="Email"
-        />
-      </div>
-      <div class="mb-3">
-        <label class="form-label fw-semibold">Contact Number</label>
-        <input
-          type="number"
-          class="form-control"
-          style="background-color: #d9d9d9; border-radius: 0"
-          placeholder="Contact Number"
-        />
-      </div>
-      <div class="mb-3">
-        <label class="form-label fw-semibold">Location</label>
-        <input
-          type="text"
-          class="form-control"
-          style="background-color: #d9d9d9; border-radius: 0"
-          placeholder="Address"
-        />
-      </div>
-      <div class="mb-3">
-        <label class="form-label fw-semibold">Password</label>
-        <input
-          type="text"
-          class="form-control"
-          style="background-color: #d9d9d9; border-radius: 0"
-          placeholder="Name"
-        />
-      </div>
-      <div class="mb-3 mt-5 text-center">
-        <button
-          class="btn button-red text-white fw-bolder mx-auto"
-          type="submit"
-        >
-          Sumbmit
-        </button>
-      </div>
+          <p class="text-white p-2">
+            {{ error }}
+          </p>
+        </div>
+        <div class="mb-3 mt-5 text-center">
+          <button
+            class="btn button-red text-white fw-bolder mx-auto"
+            type="submit"
+          >
+            Sumbmit
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </section>
