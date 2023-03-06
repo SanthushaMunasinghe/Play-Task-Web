@@ -1,13 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons';
+import { CreatePasswordComponent } from '../create-password/create-password.component';
 
 interface AdminResponse {
-  institutionId: string;
+  adminId: string;
 }
 
 @Component({
@@ -16,11 +16,11 @@ interface AdminResponse {
   styleUrls: ['./admin-registration-form.component.css'],
 })
 export class AdminRegistrationFormComponent {
-  faEyeIcon = faEye;
-  faEyeSlashIcon = faEyeSlash;
+  @ViewChild('passwordComponent')
+  createPasswordComponent!: CreatePasswordComponent;
 
   @Input() initialRegistration: boolean = false;
-  @Input() institutionId: string = '63f5c0ac91b937d3af647cb0';
+  @Input() institutionId: string = '';
 
   registrationForm = this.formBuilder.group({
     name: '',
@@ -36,8 +36,6 @@ export class AdminRegistrationFormComponent {
     ? ['General']
     : ['General', 'Academic', 'Non-Academic'];
 
-  showPassword: boolean = false;
-
   isSubmitting: boolean = false;
 
   registrationErrors: string[] = [''];
@@ -48,9 +46,11 @@ export class AdminRegistrationFormComponent {
     private http: HttpClient
   ) {}
 
-  onSubmit(): void {
-    this.isSubmitting = true;
+  addPasswordError(err: string): void {
+    this.registrationErrors.push(err);
+  }
 
+  onSubmit(): void {
     const formAdmin = this.registrationForm.value;
     this.registrationErrors = [];
 
@@ -59,39 +59,22 @@ export class AdminRegistrationFormComponent {
     for (let value of Object.values(formAdmin)) {
       if (value == '') {
         this.registrationErrors.push('Fill All Fields!');
-        this.isSubmitting = false;
         break;
       }
     }
 
-    const passwordPattern =
-      /^(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-
-    if (formAdmin.password) {
-      if (formAdmin.password.length < 8) {
-        this.registrationErrors.push('Password Must Be 8-16 Characters');
-        this.isSubmitting = false;
-      } else if (!passwordPattern.test(formAdmin.password)) {
-        this.registrationErrors.push(
-          'Your Password Must Contain At Least One Uppercase Letter, One Lowercase Letter, One Number, And One Special Character.'
-        );
-        this.isSubmitting = false;
-      } else if (formAdmin.password != formAdmin.confirmedPassword) {
-        this.registrationErrors.push('Password Does Not Match!');
-        this.isSubmitting = false;
-      }
-    }
+    this.createPasswordComponent.validatePassword();
 
     const numberPattern = /^[0-9]{10}$/;
 
     if (formAdmin.contactno && !numberPattern.test(formAdmin.contactno)) {
       this.registrationErrors.push('Invalid Contact No');
-      this.isSubmitting = false;
     }
 
     currentTypeIndex = Number(formAdmin.authorization);
 
     if (this.registrationErrors.length == 0) {
+      this.isSubmitting = true;
       const admin = {
         name: formAdmin.name,
         authorization: this.types[currentTypeIndex],
@@ -104,10 +87,9 @@ export class AdminRegistrationFormComponent {
       console.log(admin);
       this.http.post<AdminResponse>('/api/admins', admin).subscribe(
         (res) => {
-          console.log(res);
           this.registrationForm.reset();
-          console.log(res.institutionId);
           this.isSubmitting = false;
+          this.router.navigate(['/dashboard', this.institutionId, res.adminId]);
         },
         (error) => {
           this.registrationErrors.push(error.error.message);
@@ -115,9 +97,5 @@ export class AdminRegistrationFormComponent {
         }
       );
     }
-  }
-
-  togglePasswordVisibility(): void {
-    this.showPassword = !this.showPassword;
   }
 }

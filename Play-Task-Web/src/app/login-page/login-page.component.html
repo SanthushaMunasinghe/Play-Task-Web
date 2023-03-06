@@ -1,1 +1,12 @@
 <app-navbar-default [navIndex]="2"></app-navbar-default>
+<app-institution-login-form
+  (loginStatus)="onLogin($event)"
+  *ngIf="!isLoggedIn"
+></app-institution-login-form>
+<app-login-form
+  *ngIf="isLoggedIn"
+  [loginUrl]="'/api/adminlogin'"
+  [label]="'Admin'"
+  [institutionId]="id"
+></app-login-form>
+<app-footer-default></app-footer-default>

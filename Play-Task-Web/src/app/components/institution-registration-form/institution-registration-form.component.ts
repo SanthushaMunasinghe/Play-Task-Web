@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { faEyeSlash, faEye } from '@fortawesome/free-regular-svg-icons';
+
+import { CreatePasswordComponent } from '../create-password/create-password.component';
 
 interface InstitutionResponse {
   institutionId: string;
@@ -15,6 +16,9 @@ interface InstitutionResponse {
   styleUrls: ['./institution-registration-form.component.css'],
 })
 export class InstitutionRegistrationFormComponent {
+  @ViewChild('passwordComponent')
+  createPasswordComponent!: CreatePasswordComponent;
+
   faEyeIcon = faEye;
   faEyeSlashIcon = faEyeSlash;
 
@@ -41,11 +45,11 @@ export class InstitutionRegistrationFormComponent {
 
   registrationErrors: string[] = [''];
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private http: HttpClient
-  ) {}
+  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
+
+  addPasswordError(err: string): void {
+    this.registrationErrors.push(err);
+  }
 
   onSubmit(): void {
     this.isSubmitting = true;
@@ -63,25 +67,7 @@ export class InstitutionRegistrationFormComponent {
       }
     }
 
-    const passwordPattern =
-      /^(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-
-    if (formInstitution.password) {
-      if (formInstitution.password.length < 8) {
-        this.registrationErrors.push('Password Must Be 8-16 Characters');
-        this.isSubmitting = false;
-      } else if (!passwordPattern.test(formInstitution.password)) {
-        this.registrationErrors.push(
-          'Your Password Must Contain At Least One Uppercase Letter, One Lowercase Letter, One Number, And One Special Character.'
-        );
-        this.isSubmitting = false;
-      } else if (
-        formInstitution.password != formInstitution.confirmedPassword
-      ) {
-        this.registrationErrors.push('Password Does Not Match!');
-        this.isSubmitting = false;
-      }
-    }
+    this.createPasswordComponent.validatePassword();
 
     const numberPattern = /^[0-9]{10}$/;
 
@@ -107,13 +93,11 @@ export class InstitutionRegistrationFormComponent {
 
       this.http.post<InstitutionResponse>('/api/institutions', inst).subscribe(
         (res) => {
-          console.log(res);
           this.registrationForm.reset();
           this.registrationStatus.emit({
             isRegistered: true,
             id: res.institutionId,
           });
-          console.log(res.institutionId);
           this.isSubmitting = false;
         },
         (error) => {

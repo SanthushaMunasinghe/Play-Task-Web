@@ -17,6 +17,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AdminRegistrationFormComponent } from './components/admin-registration-form/admin-registration-form.component';
 import { InstitutionRegistrationFormComponent } from './components/institution-registration-form/institution-registration-form.component';
 import { CreatePasswordComponent } from './components/create-password/create-password.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { InstitutionLoginFormComponent } from './components/institution-login-form/institution-login-form.component';
+import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { CreatePasswordComponent } from './components/create-password/create-pas
     AdminRegistrationFormComponent,
     InstitutionRegistrationFormComponent,
     CreatePasswordComponent,
+    LoginFormComponent,
+    InstitutionLoginFormComponent,
+    DashboardPageComponent,
   ],
   imports: [
     BrowserModule,

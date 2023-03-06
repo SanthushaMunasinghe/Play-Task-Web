@@ -10,17 +10,26 @@
         />
       </a>
       <div>
-        <h3 class="fw-bolder">Institution Registration</h3>
+        <h3 class="fw-bolder">
+          {{ isRegistered ? "Admin Registration" : "Institution Registration" }}
+        </h3>
       </div>
     </div>
   </nav>
 </header>
 
-<!-- Registration form -->
-<!-- <app-institution-registration-form
+<!-- Institution Registration Form -->
+<app-institution-registration-form
   (registrationStatus)="onRegistration($event)"
-></app-institution-registration-form> -->
-<app-admin-registration-form></app-admin-registration-form>
+  *ngIf="!isRegistered"
+></app-institution-registration-form>
+
+<!--Admin Registration Form-->
+<app-admin-registration-form
+  *ngIf="isRegistered"
+  [initialRegistration]="true"
+  [institutionId]="id"
+></app-admin-registration-form>
 
 <!--Footer-->
 <app-footer-default></app-footer-default>

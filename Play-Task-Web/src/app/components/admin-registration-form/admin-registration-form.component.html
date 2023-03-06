@@ -59,52 +59,13 @@
             formControlName="home"
           />
         </div>
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Password</label>
-          <div style="display: grid; grid-template-columns: 14fr 1fr">
-            <input
-              type="{{ showPassword ? 'text' : 'password' }}"
-              class="form-control"
-              style="background-color: #d9d9d9; border-radius: 0"
-              placeholder="Must Contain At Least One Capital And Simple letter, Number, Symbol"
-              maxlength="16"
-              formControlName="password"
-            />
-            <button
-              class="btn btn-outline-secondary"
-              type="button"
-              style="background-color: #d9d9d9; border-radius: 0"
-              (click)="togglePasswordVisibility()"
-            >
-              <fa-icon
-                [icon]="showPassword ? faEyeSlashIcon : faEyeIcon"
-              ></fa-icon>
-            </button>
-          </div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Confirm Password</label>
-          <div style="display: grid; grid-template-columns: 14fr 1fr">
-            <input
-              type="{{ showPassword ? 'text' : 'password' }}"
-              class="form-control"
-              style="background-color: #d9d9d9; border-radius: 0"
-              placeholder="Confirm Password"
-              maxlength="16"
-              formControlName="confirmedPassword"
-            />
-            <button
-              class="btn btn-outline-secondary"
-              type="button"
-              style="background-color: #d9d9d9; border-radius: 0"
-              (click)="togglePasswordVisibility()"
-            >
-              <fa-icon
-                [icon]="showPassword ? faEyeSlashIcon : faEyeIcon"
-              ></fa-icon>
-            </button>
-          </div>
-        </div>
+        <app-create-password
+          #passwordComponent
+          (pushError)="addPasswordError($event)"
+          [parentForm]="registrationForm"
+          [password]="registrationForm.value.password"
+          [confirmedPassword]="registrationForm.value.confirmedPassword"
+        ></app-create-password>
         <div
           class="mb-3"
           *ngFor="let error of registrationErrors"
