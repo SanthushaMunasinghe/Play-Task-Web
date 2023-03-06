@@ -14,3 +14,7 @@ body {
   background-color: #ff5252;
   border-radius: 0;
 }
+
+.button-red:hover {
+  background-color: #000;
+}

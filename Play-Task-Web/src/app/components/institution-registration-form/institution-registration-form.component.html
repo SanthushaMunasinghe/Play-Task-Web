@@ -1,0 +1,133 @@
+<section>
+  <div class="container">
+    <div
+      class="shadow-sm p-5 mt-5 card mx-auto"
+      style="border-radius: 0; max-width: 700px"
+    >
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Institution Name</label>
+          <input
+            type="text"
+            maxlength="64"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Type Institution Name"
+            formControlName="name"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Institution Type</label>
+          <select
+            class="form-select"
+            style="background-color: #d9d9d9; border-radius: 0"
+            formControlName="type"
+          >
+            <option *ngFor="let type of types; index as i" [value]="i">
+              {{ type }}
+            </option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Type Email"
+            formControlName="email"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Contact Number</label>
+          <input
+            type="tel"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Enter Contact Number"
+            maxlength="10"
+            formControlName="contactno"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Location</label>
+          <input
+            type="text"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Enter Location Address"
+            formControlName="location"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Password</label>
+          <div style="display: grid; grid-template-columns: 14fr 1fr">
+            <input
+              type="{{ showPassword ? 'text' : 'password' }}"
+              class="form-control"
+              style="background-color: #d9d9d9; border-radius: 0"
+              placeholder="Must Contain At Least One Capital And Simple letter, Number, Symbol"
+              maxlength="16"
+              formControlName="password"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              style="background-color: #d9d9d9; border-radius: 0"
+              (click)="togglePasswordVisibility()"
+            >
+              <fa-icon
+                [icon]="showPassword ? faEyeSlashIcon : faEyeIcon"
+              ></fa-icon>
+            </button>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Confirm Password</label>
+          <div style="display: grid; grid-template-columns: 14fr 1fr">
+            <input
+              type="{{ showPassword ? 'text' : 'password' }}"
+              class="form-control"
+              style="background-color: #d9d9d9; border-radius: 0"
+              placeholder="Confirm Password"
+              maxlength="16"
+              formControlName="confirmedPassword"
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              style="background-color: #d9d9d9; border-radius: 0"
+              (click)="togglePasswordVisibility()"
+            >
+              <fa-icon
+                [icon]="showPassword ? faEyeSlashIcon : faEyeIcon"
+              ></fa-icon>
+            </button>
+          </div>
+        </div>
+        <div
+          class="mb-3"
+          *ngFor="let error of registrationErrors"
+          style="background-color: #ff5252"
+        >
+          <p class="{{ error ? 'text-white p-2' : '' }}">
+            {{ error }}
+          </p>
+        </div>
+        <div *ngIf="isSubmitting" class="mb-3">
+          <p class="text-white p-2 bg-black">
+            Please wait, submitting your registration...
+          </p>
+        </div>
+        <div class="mb-3 mt-5 text-center">
+          <button
+            class="btn button-red text-white fw-bolder mx-auto"
+            type="submit"
+          >
+            Sumbmit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

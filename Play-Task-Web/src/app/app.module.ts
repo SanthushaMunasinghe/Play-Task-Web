@@ -13,6 +13,10 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { FooterDefaultComponent } from './components/footer-default/footer-default.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AdminRegistrationFormComponent } from './components/admin-registration-form/admin-registration-form.component';
+import { InstitutionRegistrationFormComponent } from './components/institution-registration-form/institution-registration-form.component';
+import { CreatePasswordComponent } from './components/create-password/create-password.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,9 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     LoginPageComponent,
     FooterDefaultComponent,
     RegisterPageComponent,
+    AdminRegistrationFormComponent,
+    InstitutionRegistrationFormComponent,
+    CreatePasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +37,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
