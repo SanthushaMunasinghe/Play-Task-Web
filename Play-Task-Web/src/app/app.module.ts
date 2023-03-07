@@ -20,6 +20,16 @@ import { CreatePasswordComponent } from './components/create-password/create-pas
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { InstitutionLoginFormComponent } from './components/institution-login-form/institution-login-form.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { NavbarUserComponent } from './components/navbar-user/navbar-user.component';
+import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
+
+//Services
+import { CurrentInstitutionService } from './current-institution.service';
+import { GradesPageComponent } from './grades-page/grades-page.component';
+import { ClassroomsPageComponent } from './classrooms-page/classrooms-page.component';
+import { SubjectsPageComponent } from './subjects-page/subjects-page.component';
+import { UsersPageComponent } from './users-page/users-page.component';
+import { InstitutionPageComponent } from './institution-page/institution-page.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +46,13 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
     LoginFormComponent,
     InstitutionLoginFormComponent,
     DashboardPageComponent,
+    NavbarUserComponent,
+    DashboardCardComponent,
+    GradesPageComponent,
+    ClassroomsPageComponent,
+    SubjectsPageComponent,
+    UsersPageComponent,
+    InstitutionPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +62,7 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
     HttpClientModule,
     FontAwesomeModule,
   ],
-  providers: [],
+  providers: [CurrentInstitutionService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
