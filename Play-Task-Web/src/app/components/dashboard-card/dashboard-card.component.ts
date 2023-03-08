@@ -16,8 +16,8 @@ export class DashboardCardComponent {
   @Input() description: string = '';
   @Input() url: string = '';
 
-  institution: Institution = { id: '', name: '' };
-  admin: Admin = { id: '', name: '', authorization: '' };
+  institutionId: string = '';
+  adminId: string = '';
 
   constructor(
     private router: Router,
@@ -25,18 +25,18 @@ export class DashboardCardComponent {
   ) {}
 
   onClick() {
-    this.router.navigate([this.url, this.institution.id, this.admin.id]);
+    this.router.navigate([this.url, this.institutionId, this.adminId]);
   }
 
   ngOnInit() {
     this.currentUserService.institution$.subscribe(
       (institution: Institution) => {
-        this.institution = institution;
+        this.institutionId = institution.id;
       }
     );
 
     this.currentUserService.admin$.subscribe((admin: Admin) => {
-      this.admin = admin;
+      this.adminId = admin.id;
     });
   }
 }

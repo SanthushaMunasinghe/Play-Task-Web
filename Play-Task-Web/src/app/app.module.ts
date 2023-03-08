@@ -28,6 +28,7 @@ import { SubjectsPageComponent } from './subjects-page/subjects-page.component';
 import { UsersPageComponent } from './users-page/users-page.component';
 import { InstitutionPageComponent } from './institution-page/institution-page.component';
 import { GradesListComponent } from './components/grades-list/grades-list.component';
+import { AddGradesFormComponent } from './components/add-grades-form/add-grades-form.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { GradesListComponent } from './components/grades-list/grades-list.compon
     UsersPageComponent,
     InstitutionPageComponent,
     GradesListComponent,
+    AddGradesFormComponent,
   ],
   imports: [
     BrowserModule,

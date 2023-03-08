@@ -1,3 +1,7 @@
 <app-navbar-user></app-navbar-user>
 <app-grades-list></app-grades-list>
+<app-add-grades-form
+  *ngIf="adminAuth == 'General'"
+  [institutionId]="institutionId"
+></app-add-grades-form>
 <app-footer-default></app-footer-default>
