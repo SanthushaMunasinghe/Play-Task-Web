@@ -22,14 +22,12 @@ import { InstitutionLoginFormComponent } from './components/institution-login-fo
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { NavbarUserComponent } from './components/navbar-user/navbar-user.component';
 import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
-
-//Services
-import { CurrentInstitutionService } from './current-institution.service';
 import { GradesPageComponent } from './grades-page/grades-page.component';
 import { ClassroomsPageComponent } from './classrooms-page/classrooms-page.component';
 import { SubjectsPageComponent } from './subjects-page/subjects-page.component';
 import { UsersPageComponent } from './users-page/users-page.component';
 import { InstitutionPageComponent } from './institution-page/institution-page.component';
+import { GradesListComponent } from './components/grades-list/grades-list.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +51,7 @@ import { InstitutionPageComponent } from './institution-page/institution-page.co
     SubjectsPageComponent,
     UsersPageComponent,
     InstitutionPageComponent,
+    GradesListComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +61,7 @@ import { InstitutionPageComponent } from './institution-page/institution-page.co
     HttpClientModule,
     FontAwesomeModule,
   ],
-  providers: [CurrentInstitutionService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

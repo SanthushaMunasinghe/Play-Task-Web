@@ -2,11 +2,9 @@ import { Component, Input } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-interface Link {
-  url: string;
-  institutionId: string;
-  userId: string;
-}
+import { Institution, Admin } from 'src/app/models/current-user-model';
+
+import { CurrentUserService } from '../../services/current-user.service';
 
 @Component({
   selector: 'app-dashboard-card',
@@ -16,15 +14,29 @@ interface Link {
 export class DashboardCardComponent {
   @Input() title: string = '';
   @Input() description: string = '';
-  @Input() link: Link = { url: '', institutionId: '', userId: '' };
+  @Input() url: string = '';
 
-  constructor(private router: Router) {}
+  institution: Institution = { id: '', name: '' };
+  admin: Admin = { id: '', name: '', authorization: '' };
+
+  constructor(
+    private router: Router,
+    private currentUserService: CurrentUserService
+  ) {}
 
   onClick() {
-    this.router.navigate([
-      this.link.url,
-      this.link.institutionId,
-      this.link.userId,
-    ]);
+    this.router.navigate([this.url, this.institution.id, this.admin.id]);
+  }
+
+  ngOnInit() {
+    this.currentUserService.institution$.subscribe(
+      (institution: Institution) => {
+        this.institution = institution;
+      }
+    );
+
+    this.currentUserService.admin$.subscribe((admin: Admin) => {
+      this.admin = admin;
+    });
   }
 }
