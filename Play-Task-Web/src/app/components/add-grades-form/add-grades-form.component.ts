@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { FormBuilder } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 interface GradeResponse {
   gradeId: string;
@@ -49,6 +49,7 @@ export class AddGradesFormComponent {
       this.http.post<GradeResponse>('/api/grades', grade).subscribe(
         (res) => {
           const gradeId = res.gradeId;
+
           console.log(gradeId);
           const count = formGrades.termsCount
             ? Number(formGrades.termsCount)
