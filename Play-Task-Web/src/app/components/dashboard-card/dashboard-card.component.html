@@ -2,13 +2,14 @@
   <!-- Card 1-->
   <div class="shadow mt-5 row" style="min-height: 200px">
     <div
-      class="p-3 col-4 d-flex justify-content-center align-items-center btn"
+      class="p-3 col-3 d-flex justify-content-center align-items-center btn"
       style="background-color: #2c2c2c; border-radius: 0"
+      (click)="onClick()"
     >
-      <h1 class="text-white fw-bolder text-center">{{ title }}</h1>
+      <h2 class="text-white fw-bolder text-center">{{ title }}</h2>
     </div>
     <div
-      class="p-5 col-8 bg-white d-flex justify-content-center align-items-center"
+      class="p-5 col-9 bg-white d-flex justify-content-center align-items-center"
     >
       <p class="fw-semibold text-black">
         {{ description }}

@@ -6,6 +6,11 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { GradesPageComponent } from './grades-page/grades-page.component';
+import { ClassroomsPageComponent } from './classrooms-page/classrooms-page.component';
+import { SubjectsPageComponent } from './subjects-page/subjects-page.component';
+import { UsersPageComponent } from './users-page/users-page.component';
+import { InstitutionPageComponent } from './institution-page/institution-page.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -15,6 +20,26 @@ const routes: Routes = [
   {
     path: 'dashboard/:institutionid/:adminid',
     component: DashboardPageComponent,
+  },
+  {
+    path: 'grades/:institutionid/:adminid',
+    component: GradesPageComponent,
+  },
+  {
+    path: 'classrooms/:institutionid/:adminid',
+    component: ClassroomsPageComponent,
+  },
+  {
+    path: 'subjects/:institutionid/:adminid',
+    component: SubjectsPageComponent,
+  },
+  {
+    path: 'users/:institutionid/:adminid',
+    component: UsersPageComponent,
+  },
+  {
+    path: 'institution/:institutionid/:adminid',
+    component: InstitutionPageComponent,
   },
 ];
 

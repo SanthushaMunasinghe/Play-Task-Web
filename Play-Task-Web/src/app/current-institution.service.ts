@@ -1,23 +1,11 @@
 import { Injectable } from '@angular/core';
 
-interface Institution {
-  id: string;
-  name: string;
-}
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CurrentInstitutionService {
-  institution: Institution = { id: '', name: '' };
-
-  assignInstitution(inst: Institution) {
-    this.institution = inst;
-  }
-
-  getInstitution() {
-    return this.institution;
-  }
-
-  constructor() {}
+  institution: any;
 }

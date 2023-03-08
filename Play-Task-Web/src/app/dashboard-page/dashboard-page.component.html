@@ -9,29 +9,54 @@
   [description]="
     'To set up your institution with our app, the first thing you need to do is set up the grades. You can do this by specifying the number of grades in your school, for example, from Grade 1 to 13. Once you have set up the grades, you can then specify the number of terms in each grade.'
   "
+  [link]="{
+    url: 'grades',
+    institutionId: institution.id,
+    userId: admin.id
+  }"
 ></app-dashboard-card>
 <app-dashboard-card
   [title]="'CLASSROOMS'"
   [description]="
     'To set up classrooms in our app, start by giving each classroom a name and selecting the grade it belongs to. This will help organize your students and their progress.'
   "
+  [link]="{
+    url: 'classrooms',
+    institutionId: institution.id,
+    userId: admin.id
+  }"
 ></app-dashboard-card>
 <app-dashboard-card
   [title]="'SUBJECTS'"
   [description]="
     'To create subjects in our app, first assign them to the corresponding grade level. Then, create topics and subtopics for each subject. It\'s important to group topics by terms to ensure a smooth progression of learning for students.'
   "
+  [link]="{
+    url: 'subjects',
+    institutionId: institution.id,
+    userId: admin.id
+  }"
 ></app-dashboard-card>
 <app-dashboard-card
   [title]="'USERS'"
   [description]="
     'To create users in our app, Simply select the user type you want to add, update or remove and fill in the required information. For teachers, you can also assign them to specific classrooms and subjects they will be teaching.'
   "
+  [link]="{
+    url: 'users',
+    institutionId: institution.id,
+    userId: admin.id
+  }"
 ></app-dashboard-card>
 <app-dashboard-card
   [title]="'INSTITUTION'"
   [description]="
     'Here, you can update your institution name, address, contact information, and other relevant details.'
   "
+  [link]="{
+    url: 'institution',
+    institutionId: institution.id,
+    userId: admin.id
+  }"
 ></app-dashboard-card>
 <app-footer-default></app-footer-default>

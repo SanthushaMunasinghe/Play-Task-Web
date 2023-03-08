@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 import { CurrentInstitutionService } from '../current-institution.service';
+import { CurrentAdminService } from '../current-admin.service';
 
 interface InstitutionResponse {
   id: string;
@@ -28,7 +29,8 @@ export class DashboardPageComponent {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private currentInstitution: CurrentInstitutionService
+    private currentInstitution: CurrentInstitutionService,
+    private currentAdmin: CurrentAdminService
   ) {}
 
   ngOnInit() {
@@ -40,8 +42,8 @@ export class DashboardPageComponent {
       .get<InstitutionResponse>(`/api/institution/${instId}/${'id'}`)
       .subscribe(
         (res) => {
-          this.currentInstitution.assignInstitution(res);
-          this.institution = this.currentInstitution.getInstitution();
+          this.currentInstitution.institution = res;
+          this.institution = this.currentInstitution.institution;
         },
         (error) => {
           console.log(error);
@@ -51,6 +53,7 @@ export class DashboardPageComponent {
     //Get Admin
     this.http.get<AdminResponse>(`/api/admin/${adminId}/${'id'}`).subscribe(
       (res) => {
+        this.currentAdmin.admin = res;
         this.admin = res;
       },
       (error) => {
