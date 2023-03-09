@@ -1,0 +1,55 @@
+<section>
+  <div class="container">
+    <div
+      class="shadow-sm p-5 mt-5 card mx-auto"
+      style="border-radius: 0; max-width: 700px"
+    >
+      <h3 class="fw-semibold">Add Grades</h3>
+      <form [formGroup]="addClassroomsForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Classroom Name</label>
+          <input
+            type="text"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Type Name"
+            formControlName="name"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Grade</label>
+          <input
+            type="number"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Enter Grade"
+            maxlength="16"
+            formControlName="grade"
+          />
+        </div>
+        <div
+          class="mb-3"
+          *ngFor="let error of submitErrors"
+          style="background-color: #ff5252"
+        >
+          <p class="{{ error ? 'text-white p-2' : '' }}">
+            {{ error }}
+          </p>
+        </div>
+        <div *ngIf="isSubmitting" class="mb-3">
+          <p class="text-white p-2 bg-black">
+            Please wait, submitting your registration...
+          </p>
+        </div>
+        <div class="mb-3 mt-5 text-center">
+          <button
+            class="btn button-red text-white fw-bolder mx-auto"
+            type="submit"
+          >
+            Sumbmit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

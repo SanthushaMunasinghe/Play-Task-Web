@@ -1,1 +1,7 @@
-<p>classrooms-page works!</p>
+<app-navbar-user></app-navbar-user>
+<app-classroom-list [institutionId]="institutionId"></app-classroom-list>
+<app-add-classrooms-form
+  *ngIf="adminAuth == 'General'"
+  [institutionId]="institutionId"
+></app-add-classrooms-form>
+<app-footer-default></app-footer-default>

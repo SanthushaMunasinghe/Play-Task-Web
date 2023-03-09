@@ -30,6 +30,9 @@ import { InstitutionPageComponent } from './institution-page/institution-page.co
 import { GradesListComponent } from './components/grades-list/grades-list.component';
 import { AddGradesFormComponent } from './components/add-grades-form/add-grades-form.component';
 import { GradeComponent } from './components/grade/grade.component';
+import { ClassroomListComponent } from './components/classroom-list/classroom-list.component';
+import { ClassroomComponent } from './components/classroom/classroom.component';
+import { AddClassroomsFormComponent } from './components/add-classrooms-form/add-classrooms-form.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { GradeComponent } from './components/grade/grade.component';
     GradesListComponent,
     AddGradesFormComponent,
     GradeComponent,
+    ClassroomListComponent,
+    ClassroomComponent,
+    AddClassroomsFormComponent,
   ],
   imports: [
     BrowserModule,
