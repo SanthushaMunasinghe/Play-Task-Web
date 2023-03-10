@@ -12,6 +12,7 @@ import { SubjectsPageComponent } from './subjects-page/subjects-page.component';
 import { UsersPageComponent } from './users-page/users-page.component';
 import { InstitutionPageComponent } from './institution-page/institution-page.component';
 import { TopicPageComponent } from './topic-page/topic-page.component';
+import { SubtopicPageComponent } from './subtopic-page/subtopic-page.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -45,6 +46,10 @@ const routes: Routes = [
   {
     path: 'topic/:institutionid/:adminid/:subjectid',
     component: TopicPageComponent,
+  },
+  {
+    path: 'subtopic/:institutionid/:adminid/:subjectid/:topicid',
+    component: SubtopicPageComponent,
   },
 ];
 

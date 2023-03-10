@@ -10,7 +10,7 @@ export class CurrentSubjectService {
   private subjectSubject = new Subject<SubjectModel>();
   subject$ = this.subjectSubject.asObservable();
 
-  updateInstitution(subject: SubjectModel) {
+  updateSubject(subject: SubjectModel) {
     this.subjectSubject.next(subject);
   }
   constructor() {}

@@ -43,6 +43,9 @@ export class ClassroomListComponent {
           .subscribe(
             (res) => {
               this.gradeList = res;
+              this.gradeList.sort(
+                (a, b) => Number(a.number) - Number(b.number)
+              );
               for (const grade of this.gradeList) {
                 //Get Classrooms
                 this.http

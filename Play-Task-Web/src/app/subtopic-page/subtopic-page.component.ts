@@ -3,30 +3,30 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 
 import { Institution, Admin } from '../models/current-user-model';
-import { SubjectModel } from '../models/current-subject-model';
+import { Topic } from '../models/current-topic-model';
 
 import { CurrentUserService } from '../services/current-user.service';
-import { CurrentSubjectService } from '../services/current-subject.service';
+import { CurrentTopicService } from '../services/current-topic.service';
 
 @Component({
-  selector: 'app-topic-page',
-  templateUrl: './topic-page.component.html',
-  styleUrls: ['./topic-page.component.css'],
+  selector: 'app-subtopic-page',
+  templateUrl: './subtopic-page.component.html',
+  styleUrls: ['./subtopic-page.component.css'],
 })
-export class TopicPageComponent {
+export class SubtopicPageComponent {
   institutionId: string = '';
   adminAuth: string = '';
-  subjectId: string = '';
+  topicId: string = '';
 
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
     private currentUserService: CurrentUserService,
-    private currentSubjectService: CurrentSubjectService
+    private currentTopicService: CurrentTopicService
   ) {}
 
   ngOnInit() {
-    const subjectId = this.route.snapshot.paramMap.get('subjectid');
+    const topicId = this.route.snapshot.paramMap.get('topicid');
 
     this.currentUserService.institution$.subscribe(
       (institution: Institution) => {
@@ -38,14 +38,14 @@ export class TopicPageComponent {
       this.adminAuth = admin.authorization;
     });
 
-    this.currentSubjectService.subject$.subscribe((subject: SubjectModel) => {
-      this.subjectId = subject._id;
+    this.currentTopicService.topic$.subscribe((topic: Topic) => {
+      this.topicId = topic._id;
     });
 
-    //Get Subject
-    this.http.get<SubjectModel>(`/api/getsubject/${subjectId}`).subscribe(
+    //Get Topic
+    this.http.get<Topic>(`/api/gettopic/${topicId}`).subscribe(
       (res) => {
-        this.currentSubjectService.updateSubject(res);
+        this.currentTopicService.updateTopic(res);
       },
       (error) => {
         console.log(error);

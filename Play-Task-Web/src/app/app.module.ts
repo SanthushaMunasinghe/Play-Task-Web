@@ -40,6 +40,10 @@ import { TopicPageComponent } from './topic-page/topic-page.component';
 import { TopicListComponent } from './components/topic-list/topic-list.component';
 import { SubtopicComponent } from './components/subtopic/subtopic.component';
 import { AddTopicFormComponent } from './components/add-topic-form/add-topic-form.component';
+import { SubtopicPageComponent } from './subtopic-page/subtopic-page.component';
+import { AddSubtopicFormComponent } from './components/add-subtopic-form/add-subtopic-form.component';
+import { SubtopicDataComponent } from './components/subtopic-data/subtopic-data.component';
+import { SubtopicInstructionsComponent } from './components/subtopic-instructions/subtopic-instructions.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +80,10 @@ import { AddTopicFormComponent } from './components/add-topic-form/add-topic-for
     TopicListComponent,
     SubtopicComponent,
     AddTopicFormComponent,
+    SubtopicPageComponent,
+    AddSubtopicFormComponent,
+    SubtopicDataComponent,
+    SubtopicInstructionsComponent,
   ],
   imports: [
     BrowserModule,

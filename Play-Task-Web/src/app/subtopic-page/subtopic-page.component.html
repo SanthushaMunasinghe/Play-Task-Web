@@ -1,0 +1,7 @@
+<app-navbar-user></app-navbar-user>
+<app-subtopic-data></app-subtopic-data>
+<app-add-subtopic-form
+  *ngIf="adminAuth == 'General'"
+  [topicId]="topicId"
+></app-add-subtopic-form>
+<app-footer-default></app-footer-default>

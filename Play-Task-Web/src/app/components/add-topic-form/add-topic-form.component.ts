@@ -13,8 +13,7 @@ interface TopicResponse {
   styleUrls: ['./add-topic-form.component.css'],
 })
 export class AddTopicFormComponent {
-  @Input() institutionId: string = '';
-  subject: string = '';
+  @Input() subjectId: string = '';
 
   addTopicsForm = this.formBuilder.group({
     title: '',
@@ -42,13 +41,13 @@ export class AddTopicFormComponent {
     }
 
     if (this.submitErrors.length == 0) {
-      const classroom = {
+      const topic = {
         title: formTopics.title,
-        subject: this.subject,
+        subject: this.subjectId,
         term: formTopics.term,
       };
 
-      this.http.post<TopicResponse>('/api/topics', classroom).subscribe(
+      this.http.post<TopicResponse>('/api/topics', topic).subscribe(
         (res) => {
           console.log(res.subjectId);
           this.isSubmitting = false;
