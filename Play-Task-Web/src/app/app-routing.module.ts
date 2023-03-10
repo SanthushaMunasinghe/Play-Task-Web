@@ -11,6 +11,7 @@ import { ClassroomsPageComponent } from './classrooms-page/classrooms-page.compo
 import { SubjectsPageComponent } from './subjects-page/subjects-page.component';
 import { UsersPageComponent } from './users-page/users-page.component';
 import { InstitutionPageComponent } from './institution-page/institution-page.component';
+import { TopicPageComponent } from './topic-page/topic-page.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'institution/:institutionid/:adminid',
     component: InstitutionPageComponent,
+  },
+  {
+    path: 'topic/:institutionid/:adminid/:subjectid',
+    component: TopicPageComponent,
   },
 ];
 

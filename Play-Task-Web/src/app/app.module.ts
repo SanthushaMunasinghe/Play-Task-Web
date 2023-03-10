@@ -33,6 +33,13 @@ import { GradeComponent } from './components/grade/grade.component';
 import { ClassroomListComponent } from './components/classroom-list/classroom-list.component';
 import { ClassroomComponent } from './components/classroom/classroom.component';
 import { AddClassroomsFormComponent } from './components/add-classrooms-form/add-classrooms-form.component';
+import { AddSubjectFormComponent } from './components/add-subject-form/add-subject-form.component';
+import { SubjectListComponent } from './components/subject-list/subject-list.component';
+import { TopicComponent } from './components/topic/topic.component';
+import { TopicPageComponent } from './topic-page/topic-page.component';
+import { TopicListComponent } from './components/topic-list/topic-list.component';
+import { SubtopicComponent } from './components/subtopic/subtopic.component';
+import { AddTopicFormComponent } from './components/add-topic-form/add-topic-form.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +69,13 @@ import { AddClassroomsFormComponent } from './components/add-classrooms-form/add
     ClassroomListComponent,
     ClassroomComponent,
     AddClassroomsFormComponent,
+    AddSubjectFormComponent,
+    SubjectListComponent,
+    TopicComponent,
+    TopicPageComponent,
+    TopicListComponent,
+    SubtopicComponent,
+    AddTopicFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 
 import { Institution, Admin } from '../models/current-user-model';
-
 import { CurrentUserService } from '../services/current-user.service';
 
 @Component({
-  selector: 'app-subjects-page',
-  templateUrl: './subjects-page.component.html',
-  styleUrls: ['./subjects-page.component.css'],
+  selector: 'app-topic-page',
+  templateUrl: './topic-page.component.html',
+  styleUrls: ['./topic-page.component.css'],
 })
-export class SubjectsPageComponent {
+export class TopicPageComponent {
   institutionId: string = '';
   adminAuth: string = '';
 

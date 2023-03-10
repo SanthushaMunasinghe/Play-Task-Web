@@ -1,1 +1,7 @@
-<p>subjects-page works!</p>
+<app-navbar-user></app-navbar-user>
+<app-subject-list></app-subject-list>
+<app-add-subject-form
+  *ngIf="adminAuth == 'General'"
+  [institutionId]="institutionId"
+></app-add-subject-form>
+<app-footer-default></app-footer-default>
