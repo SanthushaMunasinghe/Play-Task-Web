@@ -45,6 +45,17 @@ import { AddSubtopicFormComponent } from './components/add-subtopic-form/add-sub
 import { SubtopicDataComponent } from './components/subtopic-data/subtopic-data.component';
 import { SubtopicInstructionsComponent } from './components/subtopic-instructions/subtopic-instructions.component';
 import { EditSubtopicInstructionsComponent } from './components/edit-subtopic-instructions/edit-subtopic-instructions.component';
+import { AdminsPageComponent } from './admins-page/admins-page.component';
+import { TeachersPageComponent } from './teachers-page/teachers-page.component';
+import { StudentsPageComponent } from './students-page/students-page.component';
+import { AdminListComponent } from './components/admin-list/admin-list.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { TeachersListComponent } from './components/teachers-list/teachers-list.component';
+import { TeacherComponent } from './components/teacher/teacher.component';
+import { StudentListComponent } from './components/student-list/student-list.component';
+import { StudentComponent } from './components/student/student.component';
+import { AddTeacherFormComponent } from './components/add-teacher-form/add-teacher-form.component';
+import { AddStudentFormComponent } from './components/add-student-form/add-student-form.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +97,17 @@ import { EditSubtopicInstructionsComponent } from './components/edit-subtopic-in
     SubtopicDataComponent,
     SubtopicInstructionsComponent,
     EditSubtopicInstructionsComponent,
+    AdminsPageComponent,
+    TeachersPageComponent,
+    StudentsPageComponent,
+    AdminListComponent,
+    AdminComponent,
+    TeachersListComponent,
+    TeacherComponent,
+    StudentListComponent,
+    StudentComponent,
+    AddTeacherFormComponent,
+    AddStudentFormComponent,
   ],
   imports: [
     BrowserModule,

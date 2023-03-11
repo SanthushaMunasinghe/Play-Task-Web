@@ -13,6 +13,9 @@ import { UsersPageComponent } from './users-page/users-page.component';
 import { InstitutionPageComponent } from './institution-page/institution-page.component';
 import { TopicPageComponent } from './topic-page/topic-page.component';
 import { SubtopicPageComponent } from './subtopic-page/subtopic-page.component';
+import { AdminsPageComponent } from './admins-page/admins-page.component';
+import { TeachersPageComponent } from './teachers-page/teachers-page.component';
+import { StudentsPageComponent } from './students-page/students-page.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -50,6 +53,18 @@ const routes: Routes = [
   {
     path: 'subtopic/:institutionid/:adminid/:subjectid/:topicid',
     component: SubtopicPageComponent,
+  },
+  {
+    path: 'admins/:institutionid/:adminid',
+    component: AdminsPageComponent,
+  },
+  {
+    path: 'teachers/:institutionid/:adminid',
+    component: TeachersPageComponent,
+  },
+  {
+    path: 'students/:institutionid/:adminid',
+    component: StudentsPageComponent,
   },
 ];
 

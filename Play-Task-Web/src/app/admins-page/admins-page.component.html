@@ -1,0 +1,8 @@
+<app-navbar-user></app-navbar-user>
+<app-admin-list></app-admin-list>
+<app-admin-registration-form
+  *ngIf="adminAuth == 'General'"
+  [institutionId]="institutionId"
+  [initialRegistration]="false"
+></app-admin-registration-form>
+<app-footer-default></app-footer-default>

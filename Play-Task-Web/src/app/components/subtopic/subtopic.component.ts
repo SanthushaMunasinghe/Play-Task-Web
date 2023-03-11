@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -8,12 +8,21 @@ import { Subtopic } from 'src/app/models/current-subtopic-model';
 import { SubtopicInstructionsService } from 'src/app/services/subtopic-instructions.service';
 import { CurrentSubtopicServiceService } from 'src/app/services/current-subtopic-service.service';
 
+interface SubtopicDiff {
+  [key: string]: string | string[];
+  title: string;
+  description: string;
+  instructions: string[];
+}
+
 @Component({
   selector: 'app-subtopic',
   templateUrl: './subtopic.component.html',
   styleUrls: ['./subtopic.component.css'],
 })
 export class SubtopicComponent {
+  @Input() topicId: string = '';
+
   currentSubtopic: Subtopic = {
     _id: '',
     title: '',
@@ -71,15 +80,21 @@ export class SubtopicComponent {
     }
 
     if (this.submitErrors.length == 0) {
-      const subtopic = {
+      const subtopic: SubtopicDiff = {
         title: formSubtopics.title,
         description: formSubtopics.description,
         instructions: this.instructions,
       };
 
-      console.log(subtopic);
+      if (subtopic['title'] == this.currentSubtopic['title']) {
+        subtopic['title'] = '';
+      }
+
       this.http
-        .put(`/api/updatesubtopic/${this.currentSubtopic._id}`, subtopic)
+        .put(
+          `/api/updatesubtopic/${this.topicId}/${this.currentSubtopic._id}`,
+          subtopic
+        )
         .subscribe(
           (res) => {
             console.log(res);

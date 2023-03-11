@@ -1,0 +1,67 @@
+<div class="p-3">
+  <h3 class="fw-semibold">Edit Admin</h3>
+  <form [formGroup]="editAdminForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Admin Name</label>
+      <input
+        type="text"
+        maxlength="64"
+        class="form-control"
+        style="background-color: #d9d9d9; border-radius: 0"
+        placeholder="Type Name"
+        formControlName="name"
+        [value]="currentAdmin.name"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        style="background-color: #d9d9d9; border-radius: 0"
+        placeholder="Type Email"
+        formControlName="email"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Contact Number</label>
+      <input
+        type="tel"
+        class="form-control"
+        style="background-color: #d9d9d9; border-radius: 0"
+        placeholder="Enter Contact Number"
+        maxlength="10"
+        formControlName="contactno"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Home</label>
+      <input
+        type="text"
+        class="form-control"
+        style="background-color: #d9d9d9; border-radius: 0"
+        placeholder="Enter Home Address"
+        formControlName="home"
+      />
+    </div>
+    <div
+      class="mb-3"
+      *ngFor="let error of submitErrors"
+      style="background-color: #ff5252"
+    >
+      <p class="{{ error ? 'text-white p-2' : '' }}">
+        {{ error }}
+      </p>
+    </div>
+    <div *ngIf="isSubmitting" class="mb-3">
+      <p class="text-white p-2 bg-black">
+        Please wait, submitting your registration...
+      </p>
+    </div>
+    <div class="mb-3 mt-5 text-center">
+      <button class="btn button-red text-white fw-bolder mx-auto" type="submit">
+        Update
+      </button>
+    </div>
+  </form>
+</div>

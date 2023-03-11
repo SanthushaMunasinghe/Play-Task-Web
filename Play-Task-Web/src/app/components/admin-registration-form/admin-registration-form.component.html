@@ -4,6 +4,7 @@
       class="shadow-sm p-5 mt-5 card mx-auto"
       style="border-radius: 0; max-width: 700px"
     >
+      <h3 *ngIf="!initialRegistration" class="fw-semibold">Add New Admin</h3>
       <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
         <div class="mb-3">
           <label class="form-label fw-semibold">Admin Name</label>

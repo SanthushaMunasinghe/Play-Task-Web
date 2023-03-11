@@ -88,8 +88,17 @@ export class AdminRegistrationFormComponent {
       this.http.post<AdminResponse>('/api/admins', admin).subscribe(
         (res) => {
           this.registrationForm.reset();
+          if (this.initialRegistration) {
+            this.router.navigate([
+              '/dashboard',
+              this.institutionId,
+              res.adminId,
+            ]);
+          } else {
+            window.location.reload();
+          }
+
           this.isSubmitting = false;
-          this.router.navigate(['/dashboard', this.institutionId, res.adminId]);
         },
         (error) => {
           this.registrationErrors.push(error.error.message);

@@ -1,1 +1,34 @@
-<p>users-page works!</p>
+<app-navbar-user></app-navbar-user>
+<section class="container mt-5">
+  <div
+    class="shadow-sm p-5 mt-5 card mx-auto d-flex align-items-center"
+    style="border-radius: 0; max-width: 500px"
+  >
+    <h1 class="fw-bolder">Select User Type</h1>
+    <button
+      *ngIf="adminAuth == 'General'"
+      class="mt-5 btn btn-dark fw-semibold"
+      style="width: 200px"
+      (click)="onClick('admins')"
+    >
+      ADMINS
+    </button>
+    <button
+      *ngIf="adminAuth == 'General'"
+      class="mt-5 btn btn-dark fw-semibold"
+      style="width: 200px"
+      (click)="onClick('teachers')"
+    >
+      TEACHERS
+    </button>
+    <button
+      *ngIf="adminAuth == 'General'"
+      class="mt-5 btn btn-dark fw-semibold"
+      style="width: 200px"
+      (click)="onClick('students')"
+    >
+      STUDENTS
+    </button>
+  </div>
+</section>
+<app-footer-default></app-footer-default>

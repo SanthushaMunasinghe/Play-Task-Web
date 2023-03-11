@@ -1,23 +1,18 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Institution, Admin } from '../models/current-user-model';
 import { CurrentUserService } from '../services/current-user.service';
 
 @Component({
-  selector: 'app-users-page',
-  templateUrl: './users-page.component.html',
-  styleUrls: ['./users-page.component.css'],
+  selector: 'app-admins-page',
+  templateUrl: './admins-page.component.html',
+  styleUrls: ['./admins-page.component.css'],
 })
-export class UsersPageComponent {
+export class AdminsPageComponent {
   institutionId: string = '';
   adminAuth: string = '';
-  adminId: string = '';
 
-  constructor(
-    private currentUserService: CurrentUserService,
-    private router: Router
-  ) {}
+  constructor(private currentUserService: CurrentUserService) {}
 
   ngOnInit() {
     this.currentUserService.institution$.subscribe(
@@ -28,11 +23,6 @@ export class UsersPageComponent {
 
     this.currentUserService.admin$.subscribe((admin: Admin) => {
       this.adminAuth = admin.authorization;
-      this.adminId = admin.id;
     });
-  }
-
-  onClick(usertype: string) {
-    this.router.navigate([`/${usertype}`, this.institutionId, this.adminId]);
   }
 }
