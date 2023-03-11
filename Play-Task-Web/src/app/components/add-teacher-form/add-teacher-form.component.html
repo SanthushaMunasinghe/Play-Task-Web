@@ -1,1 +1,83 @@
-<p>add-teacher-form works!</p>
+<section>
+  <div class="container">
+    <div
+      class="shadow-sm p-5 mt-5 card mx-auto"
+      style="border-radius: 0; max-width: 700px"
+    >
+      <h3 class="fw-semibold">Add New Teacher</h3>
+      <form [formGroup]="addTeacherForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Teacher Name</label>
+          <input
+            type="text"
+            maxlength="64"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Type Name"
+            formControlName="name"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Type Email"
+            formControlName="email"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Contact Number</label>
+          <input
+            type="tel"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Enter Contact Number"
+            maxlength="10"
+            formControlName="contactno"
+          />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Home</label>
+          <input
+            type="text"
+            class="form-control"
+            style="background-color: #d9d9d9; border-radius: 0"
+            placeholder="Enter Home Address"
+            formControlName="home"
+          />
+        </div>
+        <app-create-password
+          #passwordComponent
+          (pushError)="addPasswordError($event)"
+          [parentForm]="addTeacherForm"
+          [password]="addTeacherForm.value.password"
+          [confirmedPassword]="addTeacherForm.value.confirmedPassword"
+        ></app-create-password>
+        <div
+          class="mb-3"
+          *ngFor="let error of registrationErrors"
+          style="background-color: #ff5252"
+        >
+          <p class="{{ error ? 'text-white p-2' : '' }}">
+            {{ error }}
+          </p>
+        </div>
+        <div *ngIf="isSubmitting" class="mb-3">
+          <p class="text-white p-2 bg-black">
+            Please wait, submitting your registration...
+          </p>
+        </div>
+        <div class="mb-3 mt-5 text-center">
+          <button
+            class="btn button-red text-white fw-bolder mx-auto"
+            type="submit"
+          >
+            Sumbmit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,4 +1,5 @@
 export interface Student {
+  [key: string]: string | string[];
   name: string;
   email: string;
   contactno: string;

@@ -56,6 +56,8 @@ import { StudentListComponent } from './components/student-list/student-list.com
 import { StudentComponent } from './components/student/student.component';
 import { AddTeacherFormComponent } from './components/add-teacher-form/add-teacher-form.component';
 import { AddStudentFormComponent } from './components/add-student-form/add-student-form.component';
+import { EditUserClassroomsComponent } from './components/edit-user-classrooms/edit-user-classrooms.component';
+import { EditUserSubjectsComponent } from './components/edit-user-subjects/edit-user-subjects.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +110,8 @@ import { AddStudentFormComponent } from './components/add-student-form/add-stude
     StudentComponent,
     AddTeacherFormComponent,
     AddStudentFormComponent,
+    EditUserClassroomsComponent,
+    EditUserSubjectsComponent,
   ],
   imports: [
     BrowserModule,
