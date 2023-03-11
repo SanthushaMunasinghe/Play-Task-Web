@@ -107,11 +107,13 @@ export class SubjectListComponent {
 
   onClick() {
     const adminId = this.route.snapshot.paramMap.get('adminid');
-    this.router.navigate([
-      '/topic',
-      this.institutionId,
-      adminId,
-      this.currentSubject._id,
-    ]);
+    if (this.currentSubject) {
+      this.router.navigate([
+        '/topic',
+        this.institutionId,
+        adminId,
+        this.currentSubject._id,
+      ]);
+    }
   }
 }

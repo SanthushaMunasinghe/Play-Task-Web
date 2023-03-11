@@ -110,12 +110,14 @@ export class TopicListComponent {
 
   onClick() {
     const adminId = this.route.snapshot.paramMap.get('adminid');
-    this.router.navigate([
-      '/subtopic',
-      this.institutionId,
-      adminId,
-      this.subjectId,
-      this.currentTopic._id,
-    ]);
+    if (this.currentTopic) {
+      this.router.navigate([
+        '/subtopic',
+        this.institutionId,
+        adminId,
+        this.subjectId,
+        this.currentTopic._id,
+      ]);
+    }
   }
 }

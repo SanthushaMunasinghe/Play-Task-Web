@@ -4,15 +4,11 @@ import { HttpClient } from '@angular/common/http';
 
 import { Topic } from 'src/app/models/current-topic-model';
 
-import { CurrentTopicService } from '../../services/current-topic.service';
+import { Subtopic } from 'src/app/models/current-subtopic-model';
 
-interface SubtopicResponse {
-  _id: string;
-  title: string;
-  topic: string;
-  description: string;
-  instructions: string[];
-}
+import { CurrentTopicService } from '../../services/current-topic.service';
+import { CurrentSubtopicServiceService } from 'src/app/services/current-subtopic-service.service';
+import { SubtopicInstructionsService } from 'src/app/services/subtopic-instructions.service';
 
 @Component({
   selector: 'app-subtopic-data',
@@ -20,8 +16,8 @@ interface SubtopicResponse {
   styleUrls: ['./subtopic-data.component.css'],
 })
 export class SubtopicDataComponent {
-  subtopicList: SubtopicResponse[] = [];
-  subtopic: SubtopicResponse = {
+  subtopicList: Subtopic[] = [];
+  subtopic: Subtopic = {
     _id: '',
     title: '',
     topic: '',
@@ -35,7 +31,9 @@ export class SubtopicDataComponent {
 
   constructor(
     private http: HttpClient,
-    private currentTopicService: CurrentTopicService
+    private currentTopicService: CurrentTopicService,
+    private subtopicInstructionsService: SubtopicInstructionsService,
+    private currentSubtopicServiceService: CurrentSubtopicServiceService
   ) {}
 
   ngOnInit() {
@@ -43,24 +41,28 @@ export class SubtopicDataComponent {
       this.topicId = topic._id;
 
       //Get Topic
-      this.http
-        .get<SubtopicResponse[]>(`/api/getsubtopics/${this.topicId}`)
-        .subscribe(
-          (res) => {
-            this.subtopicList = res;
-            this.subtopic = this.subtopicList[0];
-            console.log(this.subtopicList);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+      this.http.get<Subtopic[]>(`/api/getsubtopics/${this.topicId}`).subscribe(
+        (res) => {
+          this.subtopicList = res;
+          this.subtopic = this.subtopicList[0];
+          this.currentSubtopicServiceService.updateSubtopic(this.subtopic);
+          this.subtopicInstructionsService.updateInstructions(
+            this.subtopic.instructions
+          );
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     });
   }
 
   onTopicSelect() {
     this.subtopic = this.subtopicList[this.selectedTopicIndex];
-    console.log(this.subtopic);
+    this.currentSubtopicServiceService.updateSubtopic(this.subtopic);
+    this.subtopicInstructionsService.updateInstructions(
+      this.subtopic.instructions
+    );
   }
 
   onClick() {}

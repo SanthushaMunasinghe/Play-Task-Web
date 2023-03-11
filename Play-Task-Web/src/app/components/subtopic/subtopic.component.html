@@ -1,1 +1,55 @@
-<div class="mb-3 p-3" style="background-color: #d9d9d9"></div>
+<div class="p-3">
+  <h3 class="fw-semibold">Edit Subtopic</h3>
+  <form [formGroup]="editSubtopicsForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label class="form-label fw-semibold"
+        >Title <span class="fw-normal">(Required)</span></label
+      >
+      <input
+        type="text"
+        class="form-control"
+        style="background-color: #d9d9d9; border-radius: 0"
+        placeholder="Type Title"
+        formControlName="title"
+        [value]="currentSubtopic.title"
+      />
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-semibold"
+        >Description <span class="fw-normal">(Required)</span></label
+      >
+      <textarea
+        type="text"
+        class="form-control"
+        style="background-color: #d9d9d9; border-radius: 0"
+        placeholder="Type Title"
+        formControlName="description"
+        maxlength="512"
+        [value]="currentSubtopic.description"
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Add Instructions</label>
+      <app-edit-subtopic-instructions></app-edit-subtopic-instructions>
+    </div>
+    <div
+      class="mb-3"
+      *ngFor="let error of submitErrors"
+      style="background-color: #ff5252"
+    >
+      <p class="{{ error ? 'text-white p-2' : '' }}">
+        {{ error }}
+      </p>
+    </div>
+    <div *ngIf="isSubmitting" class="mb-3">
+      <p class="text-white p-2 bg-black">
+        Please wait, submitting your registration...
+      </p>
+    </div>
+    <div class="mb-3 mt-5 text-center">
+      <button class="btn button-red text-white fw-bolder mx-auto" type="submit">
+        Update
+      </button>
+    </div>
+  </form>
+</div>

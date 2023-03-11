@@ -1,17 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
-import { SubtopicInstructionsService } from 'src/app/services/subtopic-instructions.service';
+import { Subtopic } from 'src/app/models/current-subtopic-model';
 
-interface SubtopicResponse {
-  _id: string;
-  title: string;
-  topic: string;
-  description: string;
-  instructions: string[];
-}
+import { SubtopicInstructionsService } from 'src/app/services/subtopic-instructions.service';
+import { CurrentSubtopicServiceService } from 'src/app/services/current-subtopic-service.service';
 
 @Component({
   selector: 'app-subtopic',
@@ -19,7 +14,7 @@ interface SubtopicResponse {
   styleUrls: ['./subtopic.component.css'],
 })
 export class SubtopicComponent {
-  @Input() currentSubtopic: SubtopicResponse = {
+  currentSubtopic: Subtopic = {
     _id: '',
     title: '',
     topic: '',
@@ -27,9 +22,9 @@ export class SubtopicComponent {
     instructions: [],
   };
 
-  editSubtopicsForm = this.formBuilder.group({
-    title: this.currentSubtopic._id,
-    description: this.currentSubtopic.description,
+  editSubtopicsForm: FormGroup = this.formBuilder.group({
+    title: '',
+    description: '',
   });
 
   instructions: string[] = [];
@@ -41,17 +36,31 @@ export class SubtopicComponent {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private subtopicInstructionsService: SubtopicInstructionsService
+    private subtopicInstructionsService: SubtopicInstructionsService,
+    private currentSubtopicServiceService: CurrentSubtopicServiceService
   ) {}
+
+  ngOnInit() {
+    this.currentSubtopicServiceService.subtopic$.subscribe((subt: Subtopic) => {
+      this.currentSubtopic = subt;
+      this.editSubtopicsForm = this.formBuilder.group({
+        title: [this.currentSubtopic.title],
+        description: [this.currentSubtopic.description],
+      });
+    });
+
+    this.subtopicInstructionsService.getInstructions$.subscribe(
+      (instructions: string[]) => {
+        this.instructions = instructions;
+      }
+    );
+  }
 
   onSubmit(): void {
     this.isSubmitting = true;
 
     const formSubtopics = this.editSubtopicsForm.value;
     this.submitErrors = [];
-
-    this.instructions = this.subtopicInstructionsService.GetInstructions();
-    console.log(this.instructions);
 
     for (let value of Object.values(formSubtopics)) {
       if (value == '') {
@@ -61,25 +70,27 @@ export class SubtopicComponent {
       }
     }
 
-    // if (this.submitErrors.length == 0) {
-    //   const topic = {
-    //     topic: this.topicId,
-    //     title: formSubtopics.title,
-    //     description: formSubtopics.description,
-    //     instructions: this.instructions,
-    //   };
+    if (this.submitErrors.length == 0) {
+      const subtopic = {
+        title: formSubtopics.title,
+        description: formSubtopics.description,
+        instructions: this.instructions,
+      };
 
-    //   this.http.post<SubtopicResponse>('/api/subtopics', topic).subscribe(
-    //     (res) => {
-    //       console.log(res.subtopicId);
-    //       this.isSubmitting = false;
-    //       window.location.reload();
-    //     },
-    //     (error) => {
-    //       this.submitErrors.push(error.error.message);
-    //       this.isSubmitting = false;
-    //     }
-    //   );
-    // }
+      console.log(subtopic);
+      this.http
+        .put(`/api/updatesubtopic/${this.currentSubtopic._id}`, subtopic)
+        .subscribe(
+          (res) => {
+            console.log(res);
+            this.isSubmitting = false;
+            window.location.reload();
+          },
+          (error) => {
+            this.submitErrors.push(error.error.message);
+            this.isSubmitting = false;
+          }
+        );
+    }
   }
 }

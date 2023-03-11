@@ -44,6 +44,7 @@ import { SubtopicPageComponent } from './subtopic-page/subtopic-page.component';
 import { AddSubtopicFormComponent } from './components/add-subtopic-form/add-subtopic-form.component';
 import { SubtopicDataComponent } from './components/subtopic-data/subtopic-data.component';
 import { SubtopicInstructionsComponent } from './components/subtopic-instructions/subtopic-instructions.component';
+import { EditSubtopicInstructionsComponent } from './components/edit-subtopic-instructions/edit-subtopic-instructions.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { SubtopicInstructionsComponent } from './components/subtopic-instruction
     AddSubtopicFormComponent,
     SubtopicDataComponent,
     SubtopicInstructionsComponent,
+    EditSubtopicInstructionsComponent,
   ],
   imports: [
     BrowserModule,
