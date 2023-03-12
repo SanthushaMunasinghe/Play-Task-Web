@@ -11,7 +11,7 @@ import { UserSubjectsService } from 'src/app/services/user-subjects.service';
 import { UserClassroomsService } from 'src/app/services/user-classrooms.service';
 
 interface GradeResponse {
-  _id: string;
+  id: string;
   number: string;
 }
 
@@ -35,7 +35,7 @@ export class EditUserSubjectsComponent {
     subject: '',
   });
 
-  grade: GradeResponse = { _id: '', number: '' };
+  grade: GradeResponse = { id: '', number: '' };
 
   subject: SubjectResponse = {
     _id: '',
@@ -82,10 +82,11 @@ export class EditUserSubjectsComponent {
         .subscribe(
           (res) => {
             this.grade = res;
+            console.log(this.grade.id);
             //Get Classroom
             this.http
               .get<SubjectResponse>(
-                `/api/getsubjectname/${this.grade._id}/${formClassrooms.subject}`
+                `/api/getsubjectname/${this.grade.id}/${formClassrooms.subject}`
               )
               .subscribe(
                 (res) => {
@@ -100,7 +101,7 @@ export class EditUserSubjectsComponent {
 
                   if (this.submitErrors.length == 0) {
                     this.subjects.push({
-                      gradeId: this.grade._id,
+                      gradeId: this.grade.id,
                       gradeNumber: this.grade.number,
                       subjectId: this.subject._id,
                       subjectName: this.subject.name,

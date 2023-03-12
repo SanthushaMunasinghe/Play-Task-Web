@@ -12,7 +12,7 @@ import { UserClassroomsService } from 'src/app/services/user-classrooms.service'
 import { UserSubjectsService } from 'src/app/services/user-subjects.service';
 
 interface GradeResponse {
-  _id: string;
+  id: string;
   number: string;
 }
 
@@ -36,7 +36,7 @@ export class EditUserClassroomsComponent {
     classroom: '',
   });
 
-  grade: GradeResponse = { _id: '', number: '' };
+  grade: GradeResponse = { id: '', number: '' };
 
   classroom: ClassroomResponse = {
     _id: '',
@@ -86,7 +86,7 @@ export class EditUserClassroomsComponent {
             this.grade = res;
 
             const validGrade = this.subjects.some(
-              (subject) => subject.gradeId === this.grade._id
+              (subject) => subject.gradeId === this.grade.id
             );
 
             if (!validGrade) {
@@ -98,7 +98,7 @@ export class EditUserClassroomsComponent {
             //Get Classroom
             this.http
               .get<ClassroomResponse>(
-                `/api/getclassroom/${this.grade._id}/${formClassrooms.classroom}`
+                `/api/getclassroom/${this.grade.id}/${formClassrooms.classroom}`
               )
               .subscribe(
                 (res) => {
@@ -113,7 +113,7 @@ export class EditUserClassroomsComponent {
 
                   if (this.submitErrors.length == 0) {
                     this.classrooms.push({
-                      gradeId: this.grade._id,
+                      gradeId: this.grade.id,
                       gradeNumber: this.grade.number,
                       classroomId: this.classroom._id,
                       classroomName: this.classroom.name,

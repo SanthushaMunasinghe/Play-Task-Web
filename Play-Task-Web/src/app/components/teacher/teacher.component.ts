@@ -4,15 +4,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 import { Teacher } from 'src/app/models/current-teacher-model';
+import { UserClassroom } from 'src/app/models/user-classroom-model';
+import { UserSubject } from 'src/app/models/user-subject-model';
 
 import { CurrentTeacherServiceService } from 'src/app/services/current-teacher-service.service';
+import { UserClassroomsService } from 'src/app/services/user-classrooms.service';
+import { UserSubjectsService } from 'src/app/services/user-subjects.service';
 
 interface TeacherDiff {
   [key: string]: string | string[];
-  name: '';
-  email: '';
-  contactno: '';
-  home: '';
+  name: string;
+  email: string;
+  contactno: string;
+  home: string;
 }
 
 @Component({
@@ -42,6 +46,9 @@ export class TeacherComponent {
     home: '',
   });
 
+  subjects: string[] = [];
+  classrooms: string[] = [];
+
   isSubmitting: boolean = false;
 
   submitErrors: string[] = [''];
@@ -49,7 +56,9 @@ export class TeacherComponent {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private currentTeacherServiceService: CurrentTeacherServiceService
+    private currentTeacherServiceService: CurrentTeacherServiceService,
+    private userClassroomsService: UserClassroomsService,
+    private userSubjectsService: UserSubjectsService
   ) {}
 
   ngOnInit() {
@@ -61,6 +70,28 @@ export class TeacherComponent {
         contactno: [this.currentTeacher.contactno],
         home: [this.currentTeacher.home],
       });
+    });
+
+    this.userClassroomsService.classrooms$.subscribe(
+      (classrooms: UserClassroom[]) => {
+        const ids: string[] = [];
+
+        for (const item of classrooms) {
+          ids.push(item.classroomId);
+        }
+
+        this.classrooms = ids;
+      }
+    );
+
+    this.userSubjectsService.subjects$.subscribe((subjects: UserSubject[]) => {
+      const ids: string[] = [];
+
+      for (const item of subjects) {
+        ids.push(item.subjectId);
+      }
+
+      this.subjects = ids;
     });
   }
 
@@ -86,11 +117,16 @@ export class TeacherComponent {
         home: formTeacher.home,
       };
 
-      const updatedTeacher: TeacherDiff = {
+      const updatedTeacher: Teacher = {
+        _id: '',
         name: '',
         email: '',
         contactno: '',
         home: '',
+        institution: '',
+        subjects: this.subjects,
+        classrooms: this.classrooms,
+        dp: '',
       };
 
       for (const key in teacher) {
@@ -99,7 +135,6 @@ export class TeacherComponent {
         }
       }
 
-      console.log(updatedTeacher);
       this.http
         .put(
           `/api/updateteacher/${this.institutionId}/${this.currentTeacher._id}`,
