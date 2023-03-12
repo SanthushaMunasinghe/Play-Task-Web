@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
+import { UserClassroom } from '../models/user-classroom-model';
+
 @Injectable({
   providedIn: 'root',
 })
 export class UserClassroomsService {
-  private classroomsSubject = new Subject<string[]>();
+  private classroomsSubject = new Subject<UserClassroom[]>();
   classrooms$ = this.classroomsSubject.asObservable();
 
-  updateClassrooms(cla: string[]) {
+  updateClassrooms(cla: UserClassroom[]) {
     this.classroomsSubject.next(cla);
   }
 

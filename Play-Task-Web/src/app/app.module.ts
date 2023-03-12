@@ -58,6 +58,7 @@ import { AddTeacherFormComponent } from './components/add-teacher-form/add-teach
 import { AddStudentFormComponent } from './components/add-student-form/add-student-form.component';
 import { EditUserClassroomsComponent } from './components/edit-user-classrooms/edit-user-classrooms.component';
 import { EditUserSubjectsComponent } from './components/edit-user-subjects/edit-user-subjects.component';
+import { InstitutionDataComponent } from './components/institution-data/institution-data.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { EditUserSubjectsComponent } from './components/edit-user-subjects/edit-
     AddStudentFormComponent,
     EditUserClassroomsComponent,
     EditUserSubjectsComponent,
+    InstitutionDataComponent,
   ],
   imports: [
     BrowserModule,

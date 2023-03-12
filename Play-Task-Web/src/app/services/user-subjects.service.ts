@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
+import { UserSubject } from '../models/user-subject-model';
+
 @Injectable({
   providedIn: 'root',
 })
 export class UserSubjectsService {
-  private subjectsSubject = new Subject<string[]>();
+  private subjectsSubject = new Subject<UserSubject[]>();
   subjects$ = this.subjectsSubject.asObservable();
 
-  updateInstructions(subj: string[]) {
+  updateSubjects(subj: UserSubject[]) {
     this.subjectsSubject.next(subj);
   }
 

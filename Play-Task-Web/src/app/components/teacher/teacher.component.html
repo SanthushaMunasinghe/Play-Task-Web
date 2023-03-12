@@ -44,6 +44,14 @@
         formControlName="home"
       />
     </div>
+    <label class="form-label fw-semibold">Edit Subjects</label>
+    <app-edit-user-subjects
+      [institutionId]="institutionId"
+    ></app-edit-user-subjects>
+    <label class="form-label fw-semibold">Edit Classrooms</label>
+    <app-edit-user-classrooms
+      [institutionId]="institutionId"
+    ></app-edit-user-classrooms>
     <div
       class="mb-3"
       *ngFor="let error of submitErrors"
