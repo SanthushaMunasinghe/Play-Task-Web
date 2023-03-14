@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { Institution } from '../../models/current-user-model';
+import { Topic } from 'src/app/models/current-topic-model';
 import { CurrentUserService } from '../../services/current-user.service';
 
 interface GradeResponse {
@@ -27,6 +28,7 @@ export class SubjectListComponent {
   subjectList: SubjectResponse[] = [];
   currentSubjectList: SubjectResponse[] = [];
   currentSubject: SubjectResponse = { _id: '', name: '', grade: '' };
+  topicList: Topic[] = [];
 
   selectedGradeIndex: number = 0;
   selectedSubjectIndex: number = 0;
@@ -98,11 +100,25 @@ export class SubjectListComponent {
     }
 
     this.currentSubject = this.currentSubjectList[0];
+    this.onSubjectSelect();
   }
 
   onSubjectSelect() {
     this.currentSubject = this.currentSubjectList[this.selectedSubjectIndex];
-    console.log(this.currentSubject);
+
+    if (this.currentSubject) {
+      //Get Topics
+      this.http
+        .get<Topic[]>(`/api/getsubjecttopics/${this.currentSubject._id}`)
+        .subscribe(
+          (res) => {
+            this.topicList = res;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
   }
 
   onClick() {

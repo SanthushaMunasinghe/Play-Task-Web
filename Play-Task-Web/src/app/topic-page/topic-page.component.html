@@ -1,7 +1,7 @@
 <app-navbar-user></app-navbar-user>
 <app-topic-list [institutionId]="institutionId"></app-topic-list>
 <app-add-topic-form
-  *ngIf="adminAuth == 'General'"
+  *ngIf="adminAuth == 'General' || adminAuth == 'Academic'"
   [subjectId]="subjectId"
 ></app-add-topic-form>
 <app-footer-default></app-footer-default>

@@ -6,7 +6,6 @@
   >
     <h1 class="fw-bolder">Select User Type</h1>
     <button
-      *ngIf="adminAuth == 'General'"
       class="mt-5 btn btn-dark fw-semibold"
       style="width: 200px"
       (click)="onClick('admins')"
@@ -14,7 +13,6 @@
       ADMINS
     </button>
     <button
-      *ngIf="adminAuth == 'General'"
       class="mt-5 btn btn-dark fw-semibold"
       style="width: 200px"
       (click)="onClick('teachers')"
@@ -22,7 +20,6 @@
       TEACHERS
     </button>
     <button
-      *ngIf="adminAuth == 'General'"
       class="mt-5 btn btn-dark fw-semibold"
       style="width: 200px"
       (click)="onClick('students')"

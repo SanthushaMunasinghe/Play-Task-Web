@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { SubjectModel } from 'src/app/models/current-subject-model';
+import { Subtopic } from 'src/app/models/current-subtopic-model';
 
 import { CurrentSubjectService } from 'src/app/services/current-subject.service';
 
@@ -31,6 +32,7 @@ export class TopicListComponent {
   topicList: TopicResponse[] = [];
   currentTopicList: TopicResponse[] = [];
   currentTopic: TopicResponse = { _id: '', title: '', subject: '', term: '' };
+  subtopicList: Subtopic[] = [];
 
   selectedTermIndex: number = 0;
   selectedTopicIndex: number = 0;
@@ -101,11 +103,24 @@ export class TopicListComponent {
       }
     }
     this.currentTopic = this.currentTopicList[0];
+    this.onTopicSelect();
   }
 
   onTopicSelect() {
     this.currentTopic = this.currentTopicList[this.selectedTopicIndex];
-    console.log(this.currentTopic);
+    if (this.currentTopic) {
+      //Get Topics
+      this.http
+        .get<Subtopic[]>(`/api/getsubtopics/${this.currentTopic._id}`)
+        .subscribe(
+          (res) => {
+            this.subtopicList = res;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
   }
 
   onClick() {

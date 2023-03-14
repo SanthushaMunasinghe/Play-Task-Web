@@ -1,7 +1,7 @@
 <app-navbar-user></app-navbar-user>
 <app-classroom-list></app-classroom-list>
 <app-add-classrooms-form
-  *ngIf="adminAuth == 'General'"
+  *ngIf="adminAuth == 'General' || adminAuth == 'Non-Academic'"
   [institutionId]="institutionId"
 ></app-add-classrooms-form>
 <app-footer-default></app-footer-default>

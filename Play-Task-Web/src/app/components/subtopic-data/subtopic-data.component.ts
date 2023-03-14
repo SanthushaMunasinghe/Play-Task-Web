@@ -45,10 +45,13 @@ export class SubtopicDataComponent {
         (res) => {
           this.subtopicList = res;
           this.subtopic = this.subtopicList[0];
-          this.currentSubtopicServiceService.updateSubtopic(this.subtopic);
-          this.subtopicInstructionsService.updateInstructions(
-            this.subtopic.instructions
-          );
+
+          if (this.subtopic) {
+            this.currentSubtopicServiceService.updateSubtopic(this.subtopic);
+            this.subtopicInstructionsService.updateInstructions(
+              this.subtopic.instructions
+            );
+          }
         },
         (error) => {
           console.log(error);

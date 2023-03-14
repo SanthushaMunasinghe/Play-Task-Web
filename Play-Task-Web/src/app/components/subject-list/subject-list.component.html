@@ -40,7 +40,10 @@
         </div>
       </div>
       <div class="pt-3" style="height: 600px; overflow-x: hidden">
-        <app-topic></app-topic>
+        <app-topic
+          *ngFor="let topic of topicList"
+          [topicName]="topic.title"
+        ></app-topic>
       </div>
       <div class="p-3 d-flex align-items-center justify-content-center">
         <button

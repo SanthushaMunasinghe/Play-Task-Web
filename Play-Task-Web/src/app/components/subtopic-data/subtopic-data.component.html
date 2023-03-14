@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="pt-3">
-        <app-subtopic [topicId]="topicId"></app-subtopic>
+        <app-subtopic *ngIf="subtopic" [topicId]="topicId"></app-subtopic>
       </div>
     </div>
   </div>
