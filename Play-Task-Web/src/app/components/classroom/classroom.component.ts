@@ -6,8 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./classroom.component.css'],
 })
 export class ClassroomComponent {
-  @Input() studentName: string = 'Santhusha Munasinghe';
-  onClick() {
-    console.log('clicked');
-  }
+  @Input() studentName: string = '';
 }

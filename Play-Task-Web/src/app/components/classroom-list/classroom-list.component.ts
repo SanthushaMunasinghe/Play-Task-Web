@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Institution } from '../../models/current-user-model';
 import { CurrentUserService } from '../../services/current-user.service';
 
+import { Student } from 'src/app/models/current-student-model';
+
 interface GradeResponse {
   _id: string;
   number: string;
@@ -25,8 +27,17 @@ export class ClassroomListComponent {
   gradeList: GradeResponse[] = [];
   classroomList: ClassroomResponse[] = [];
   currentClassroomList: ClassroomResponse[] = [];
+  currentClassroom: ClassroomResponse = {
+    _id: '',
+    name: '',
+    grade: '',
+  };
+  studentList: Student[] = [];
 
-  selectedIndex: number = 0;
+  institutionId: string = '';
+
+  selectedGradeIndex: number = 0;
+  selectedClassroomIndex: number = 0;
 
   constructor(
     private http: HttpClient,
@@ -36,10 +47,10 @@ export class ClassroomListComponent {
   ngOnInit() {
     this.currentUserService.institution$.subscribe(
       (institution: Institution) => {
-        const institutionId = institution.id;
+        this.institutionId = institution.id;
         //Get Grades
         this.http
-          .get<GradeResponse[]>(`/api/getgrades/${institutionId}`)
+          .get<GradeResponse[]>(`/api/getgrades/${this.institutionId}`)
           .subscribe(
             (res) => {
               this.gradeList = res;
@@ -85,12 +96,36 @@ export class ClassroomListComponent {
 
   onGradeSelect() {
     this.currentClassroomList = [];
-    const selectedGrade = this.gradeList[this.selectedIndex];
+    const selectedGrade = this.gradeList[this.selectedGradeIndex];
 
     for (const classroom of this.classroomList) {
       if (classroom.grade == selectedGrade._id) {
         this.currentClassroomList.push(classroom);
       }
+    }
+
+    this.selectedClassroomIndex = 0;
+    this.onClassroomSelect();
+  }
+
+  onClassroomSelect() {
+    if (this.currentClassroomList.length != 0) {
+      this.currentClassroom =
+        this.currentClassroomList[this.selectedClassroomIndex];
+
+      //Get Student
+      this.http
+        .get<Student[]>(
+          `/api/getsclassroomtudents/${this.currentClassroom._id}`
+        )
+        .subscribe(
+          (res) => {
+            this.studentList = res;
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     }
   }
 }

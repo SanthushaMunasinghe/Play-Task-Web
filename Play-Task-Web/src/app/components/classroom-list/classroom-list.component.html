@@ -14,7 +14,7 @@
             <select
               class="form-select bg-white"
               style="border-radius: 0"
-              [(ngModel)]="selectedIndex"
+              [(ngModel)]="selectedGradeIndex"
               (change)="onGradeSelect()"
             >
               <option *ngFor="let grade of gradeList; index as i" [value]="i">
@@ -23,7 +23,12 @@
             </select>
           </div>
           <div>
-            <select class="form-select bg-white" style="border-radius: 0">
+            <select
+              class="form-select bg-white"
+              style="border-radius: 0"
+              [(ngModel)]="selectedClassroomIndex"
+              (change)="onClassroomSelect()"
+            >
               <option
                 *ngFor="let classroom of currentClassroomList; index as i"
                 [value]="i"
@@ -35,7 +40,10 @@
         </div>
       </div>
       <div class="pt-3" style="height: 600px; overflow-x: hidden">
-        <app-classroom></app-classroom>
+        <app-classroom
+          *ngFor="let stud of studentList"
+          [studentName]="stud.name"
+        ></app-classroom>
       </div>
     </div>
   </div>

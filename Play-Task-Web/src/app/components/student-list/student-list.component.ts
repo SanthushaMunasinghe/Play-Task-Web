@@ -55,7 +55,7 @@ export class StudentListComponent {
     this.currentUserService.institution$.subscribe((inst: Institution) => {
       this.institutionId = inst.id;
 
-      //Get Topic
+      //Get Student
       this.http
         .get<Student[]>(`/api/getstudents/${this.institutionId}`)
         .subscribe(
