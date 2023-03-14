@@ -7,9 +7,9 @@ import { faCircleDot } from '@fortawesome/free-regular-svg-icons';
 import { UserClassroom } from 'src/app/models/user-classroom-model';
 import { UserSubject } from 'src/app/models/user-subject-model';
 
-import { UserClassroomsService } from 'src/app/services/user-classrooms.service';
+import { TeacherClassroomsService } from 'src/app/services/teacher-classrooms.service';
 
-import { UserSubjectsService } from 'src/app/services/user-subjects.service';
+import { TeacherSubjectsService } from 'src/app/services/teacher-subjects.service';
 
 interface GradeResponse {
   id: string;
@@ -53,8 +53,8 @@ export class EditUserClassroomsComponent {
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
-    private userClassroomsService: UserClassroomsService,
-    private userSubjectsService: UserSubjectsService
+    private userClassroomsService: TeacherClassroomsService,
+    private userSubjectsService: TeacherSubjectsService
   ) {}
 
   ngOnInit() {
@@ -129,13 +129,13 @@ export class EditUserClassroomsComponent {
                   this.isSubmitting = false;
                 },
                 (error) => {
-                  this.submitErrors.push(error);
+                  this.submitErrors.push('Classroom Error');
                   this.isSubmitting = false;
                 }
               );
           },
           (error) => {
-            this.submitErrors.push(error);
+            this.submitErrors.push('Grade Error');
             this.isSubmitting = false;
           }
         );

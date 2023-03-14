@@ -19,7 +19,7 @@ export class AdminRegistrationFormComponent {
   @ViewChild('passwordComponent')
   createPasswordComponent!: CreatePasswordComponent;
 
-  @Input() initialRegistration: boolean = false;
+  @Input() initialRegistration: boolean = true;
   @Input() institutionId: string = '';
 
   registrationForm = this.formBuilder.group({
@@ -32,9 +32,7 @@ export class AdminRegistrationFormComponent {
     confirmedPassword: '',
   });
 
-  types: string[] = this.initialRegistration
-    ? ['General']
-    : ['General', 'Academic', 'Non-Academic'];
+  types: string[] = [];
 
   isSubmitting: boolean = false;
 
@@ -45,6 +43,12 @@ export class AdminRegistrationFormComponent {
     private router: Router,
     private http: HttpClient
   ) {}
+
+  ngOnInit(): void {
+    this.types = this.initialRegistration
+      ? ['General']
+      : ['General', 'Academic', 'Non-Academic'];
+  }
 
   addPasswordError(err: string): void {
     this.registrationErrors.push(err);

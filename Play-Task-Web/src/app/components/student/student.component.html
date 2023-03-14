@@ -44,10 +44,20 @@
         formControlName="home"
       />
     </div>
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Grade</label>
+      <input
+        type="text"
+        class="form-control"
+        style="background-color: #d9d9d9; border-radius: 0"
+        placeholder="Enter Classroom"
+        formControlName="grade"
+      />
+    </div>
     <label class="form-label fw-semibold">Edit Subjects</label>
-    <app-edit-user-subjects
+    <app-edit-student-subjects
       [institutionId]="institutionId"
-    ></app-edit-user-subjects>
+    ></app-edit-student-subjects>
     <div class="mb-3">
       <label class="form-label fw-semibold">Classroom</label>
       <input

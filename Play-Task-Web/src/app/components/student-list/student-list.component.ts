@@ -8,15 +8,9 @@ import { UserSubject } from 'src/app/models/user-subject-model';
 
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { CurrentStudentServiceService } from 'src/app/services/current-student-service.service';
-import { UserSubjectsService } from 'src/app/services/user-subjects.service';
+import { StudentSubjectsService } from 'src/app/services/student-subjects.service';
 
 interface SubjectResponse {
-  _id: string;
-  name: string;
-  grade: string;
-}
-
-interface ClassroomResponse {
   _id: string;
   name: string;
   grade: string;
@@ -54,7 +48,7 @@ export class StudentListComponent {
     private http: HttpClient,
     private currentUserService: CurrentUserService,
     private currentStudentServiceService: CurrentStudentServiceService,
-    private userSubjectsService: UserSubjectsService
+    private studentSubjectsService: StudentSubjectsService
   ) {}
 
   ngOnInit() {
@@ -68,8 +62,10 @@ export class StudentListComponent {
           (res) => {
             this.studentList = res;
             this.student = this.studentList[0];
-            this.currentStudentServiceService.updateStudent(this.student);
-            this.getSubjects(this.student);
+            if (this.student) {
+              this.currentStudentServiceService.updateStudent(this.student);
+              this.getSubjects(this.student);
+            }
           },
           (error) => {
             console.log(error);
@@ -78,11 +74,11 @@ export class StudentListComponent {
     });
   }
 
-  getSubjects(teacher: Student) {
+  getSubjects(student: Student) {
     let subjects: UserSubject[] = [];
-    this.userSubjectsService.updateSubjects(subjects);
+    this.studentSubjectsService.updateSubjects(subjects);
 
-    for (const subject of teacher.subjects) {
+    for (const subject of student.subjects) {
       this.http.get<SubjectResponse>(`/api/getsubject/${subject}`).subscribe(
         (res) => {
           const gotSubject = res;
@@ -98,7 +94,7 @@ export class StudentListComponent {
                   subjectName: gotSubject.name,
                 });
 
-                this.userSubjectsService.updateSubjects(subjects);
+                this.studentSubjectsService.updateSubjects(subjects);
               },
               (error) => {
                 console.log(error);
@@ -115,6 +111,8 @@ export class StudentListComponent {
   onStudentSelect() {
     this.student = this.studentList[this.selectedStudentIndex];
     this.currentStudentServiceService.updateStudent(this.student);
-    this.getSubjects(this.student);
+    if (this.student) {
+      this.getSubjects(this.student);
+    }
   }
 }

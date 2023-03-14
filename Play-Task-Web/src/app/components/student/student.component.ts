@@ -4,12 +4,23 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 import { Student } from 'src/app/models/current-student-model';
-import { UserClassroom } from 'src/app/models/user-classroom-model';
 import { UserSubject } from 'src/app/models/user-subject-model';
+import { UserClassroom } from 'src/app/models/user-classroom-model';
 
 import { CurrentStudentServiceService } from 'src/app/services/current-student-service.service';
-import { UserClassroomsService } from 'src/app/services/user-classrooms.service';
-import { UserSubjectsService } from 'src/app/services/user-subjects.service';
+import { StudentSubjectsService } from 'src/app/services/student-subjects.service';
+
+interface ClassroomResponse {
+  _id: string;
+  name: string;
+  grade: string;
+}
+
+interface GradeResponse {
+  id: string;
+  number: string;
+  institution: string;
+}
 
 interface StudentDiff {
   [key: string]: string | string[];
@@ -17,7 +28,6 @@ interface StudentDiff {
   email: string;
   contactno: string;
   home: string;
-  classroom: string;
 }
 
 @Component({
@@ -40,16 +50,23 @@ export class StudentComponent {
     dp: '',
   };
 
+  currentClassroom: UserClassroom = {
+    gradeId: '',
+    gradeNumber: '',
+    classroomId: '',
+    classroomName: '',
+  };
+
+  subjects: string[] = [];
+
   editStudentForm: FormGroup = this.formBuilder.group({
     name: '',
     email: '',
     contactno: '',
     home: '',
+    grade: '',
     classroom: '',
   });
-
-  subjects: string[] = [];
-  classrooms: string[] = [];
 
   isSubmitting: boolean = false;
 
@@ -59,43 +76,64 @@ export class StudentComponent {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private currentStudentServiceService: CurrentStudentServiceService,
-    private userClassroomsService: UserClassroomsService,
-    private userSubjectsService: UserSubjectsService
+    private studentSubjectsService: StudentSubjectsService
   ) {}
 
   ngOnInit() {
-    this.currentStudentServiceService.student$.subscribe((teacher: Student) => {
-      this.currentStudent = teacher;
-      this.editStudentForm = this.formBuilder.group({
-        name: [this.currentStudent.name],
-        email: [this.currentStudent.email],
-        contactno: [this.currentStudent.contactno],
-        home: [this.currentStudent.home],
-        classroom: [this.currentStudent.classroom],
-      });
+    this.currentStudentServiceService.student$.subscribe((stud: Student) => {
+      this.currentStudent = stud;
+      this.http
+        .get<ClassroomResponse>(
+          `/api/getclassroombyid/${this.currentStudent.classroom}`
+        )
+        .subscribe(
+          (res) => {
+            const classroom: ClassroomResponse = res;
+
+            this.http
+              .get<GradeResponse>(`/api/getgradebyid/${classroom.grade}`)
+              .subscribe(
+                (res) => {
+                  const grade: GradeResponse = res;
+
+                  this.currentClassroom = {
+                    gradeId: classroom.grade,
+                    gradeNumber: grade.number,
+                    classroomId: this.currentStudent.classroom,
+                    classroomName: classroom.name,
+                  };
+
+                  this.editStudentForm = this.formBuilder.group({
+                    name: [this.currentStudent.name],
+                    email: [this.currentStudent.email],
+                    contactno: [this.currentStudent.contactno],
+                    home: [this.currentStudent.home],
+                    grade: [this.currentClassroom.gradeNumber],
+                    classroom: [this.currentClassroom.classroomName],
+                  });
+                },
+                (error) => {
+                  console.log(error);
+                }
+              );
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     });
 
-    this.userClassroomsService.classrooms$.subscribe(
-      (classrooms: UserClassroom[]) => {
+    this.studentSubjectsService.subjects$.subscribe(
+      (subjects: UserSubject[]) => {
         const ids: string[] = [];
 
-        for (const item of classrooms) {
-          ids.push(item.classroomId);
+        for (const item of subjects) {
+          ids.push(item.subjectId);
         }
 
-        this.classrooms = ids;
+        this.subjects = ids;
       }
     );
-
-    this.userSubjectsService.subjects$.subscribe((subjects: UserSubject[]) => {
-      const ids: string[] = [];
-
-      for (const item of subjects) {
-        ids.push(item.subjectId);
-      }
-
-      this.subjects = ids;
-    });
   }
 
   onSubmit(): void {
@@ -118,40 +156,70 @@ export class StudentComponent {
         email: formStudent.email,
         contactno: formStudent.contactno,
         home: formStudent.home,
-        classroom: formStudent.classroom,
       };
 
-      const updatedStudent: Student = {
-        _id: '',
-        name: '',
-        email: '',
-        contactno: '',
-        home: '',
-        institution: '',
-        subjects: this.subjects,
-        classroom: '',
-        dp: '',
-      };
-
-      for (const key in student) {
-        if (this.currentStudent[key] != student[key]) {
-          updatedStudent[key] = student[key];
-        }
-      }
-
+      //Get Grade
       this.http
-        .put(
-          `/api/updateteacher/${this.institutionId}/${this.currentStudent._id}`,
-          updatedStudent
+        .get<GradeResponse>(
+          `/api/getgrade/${this.institutionId}/${formStudent.grade}`
         )
         .subscribe(
           (res) => {
-            console.log(res);
-            this.isSubmitting = false;
-            window.location.reload();
+            const grade: GradeResponse = res;
+
+            //Get Classroom
+            this.http
+              .get<ClassroomResponse>(
+                `/api/getclassroom/${grade.id}/${formStudent.classroom}`
+              )
+              .subscribe(
+                (res) => {
+                  const classroom: ClassroomResponse = res;
+
+                  const updatedStudent: Student = {
+                    _id: this.currentStudent._id,
+                    name: '',
+                    email: '',
+                    contactno: '',
+                    home: '',
+                    institution: '',
+                    subjects: this.subjects,
+                    classroom: classroom._id,
+                    dp: '',
+                  };
+                  for (const key in student) {
+                    if (this.currentStudent[key] != student[key]) {
+                      updatedStudent[key] = student[key];
+                    }
+                  }
+
+                  console.log(updatedStudent);
+
+                  this.http
+                    .put(
+                      `/api/updatestudent/${this.institutionId}/${this.currentStudent._id}`,
+                      updatedStudent
+                    )
+                    .subscribe(
+                      (res) => {
+                        console.log(res);
+                        this.isSubmitting = false;
+                        window.location.reload();
+                      },
+                      (error) => {
+                        this.submitErrors.push(error.error.message);
+                        this.isSubmitting = false;
+                      }
+                    );
+                },
+                (error) => {
+                  this.submitErrors.push(error);
+                  this.isSubmitting = false;
+                }
+              );
           },
           (error) => {
-            this.submitErrors.push(error.error.message);
+            this.submitErrors.push(error);
             this.isSubmitting = false;
           }
         );

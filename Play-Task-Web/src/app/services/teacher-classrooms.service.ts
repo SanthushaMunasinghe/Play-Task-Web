@@ -6,7 +6,7 @@ import { UserClassroom } from '../models/user-classroom-model';
 @Injectable({
   providedIn: 'root',
 })
-export class UserClassroomsService {
+export class TeacherClassroomsService {
   private classroomsSubject = new Subject<UserClassroom[]>();
   classrooms$ = this.classroomsSubject.asObservable();
 

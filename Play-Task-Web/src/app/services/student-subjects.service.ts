@@ -6,13 +6,12 @@ import { UserSubject } from '../models/user-subject-model';
 @Injectable({
   providedIn: 'root',
 })
-export class UserSubjectsService {
+export class StudentSubjectsService {
   private subjectsSubject = new Subject<UserSubject[]>();
   subjects$ = this.subjectsSubject.asObservable();
 
   updateSubjects(subj: UserSubject[]) {
     this.subjectsSubject.next(subj);
   }
-
   constructor() {}
 }

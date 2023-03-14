@@ -9,8 +9,8 @@ import { UserClassroom } from 'src/app/models/user-classroom-model';
 
 import { CurrentUserService } from 'src/app/services/current-user.service';
 import { CurrentTeacherServiceService } from 'src/app/services/current-teacher-service.service';
-import { UserSubjectsService } from 'src/app/services/user-subjects.service';
-import { UserClassroomsService } from 'src/app/services/user-classrooms.service';
+import { TeacherSubjectsService } from 'src/app/services/teacher-subjects.service';
+import { TeacherClassroomsService } from 'src/app/services/teacher-classrooms.service';
 
 interface SubjectResponse {
   _id: string;
@@ -56,8 +56,8 @@ export class TeachersListComponent {
     private http: HttpClient,
     private currentUserService: CurrentUserService,
     private currentTeacherServiceService: CurrentTeacherServiceService,
-    private userSubjectsService: UserSubjectsService,
-    private userClassroomsService: UserClassroomsService
+    private userSubjectsService: TeacherSubjectsService,
+    private userClassroomsService: TeacherClassroomsService
   ) {}
 
   ngOnInit() {
@@ -72,8 +72,10 @@ export class TeachersListComponent {
             this.teacherList = res;
             this.teacher = this.teacherList[0];
             this.currentTeacherServiceService.updateTeacher(this.teacher);
-            this.getSubjects(this.teacher);
-            this.getClassrooms(this.teacher);
+            if (this.teacher) {
+              this.getSubjects(this.teacher);
+              this.getClassrooms(this.teacher);
+            }
           },
           (error) => {
             console.log(error);
@@ -155,7 +157,9 @@ export class TeachersListComponent {
   onTeacherSelect() {
     this.teacher = this.teacherList[this.selectedTeacherIndex];
     this.currentTeacherServiceService.updateTeacher(this.teacher);
-    this.getSubjects(this.teacher);
-    this.getClassrooms(this.teacher);
+    if (this.teacher) {
+      this.getSubjects(this.teacher);
+      this.getClassrooms(this.teacher);
+    }
   }
 }

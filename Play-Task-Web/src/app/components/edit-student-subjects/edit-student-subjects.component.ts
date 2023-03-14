@@ -7,8 +7,7 @@ import { faCircleDot } from '@fortawesome/free-regular-svg-icons';
 import { UserSubject } from 'src/app/models/user-subject-model';
 import { UserClassroom } from 'src/app/models/user-classroom-model';
 
-import { TeacherSubjectsService } from 'src/app/services/teacher-subjects.service';
-import { TeacherClassroomsService } from 'src/app/services/teacher-classrooms.service';
+import { StudentSubjectsService } from 'src/app/services/student-subjects.service';
 
 interface GradeResponse {
   id: string;
@@ -21,11 +20,11 @@ interface SubjectResponse {
 }
 
 @Component({
-  selector: 'app-edit-user-subjects',
-  templateUrl: './edit-user-subjects.component.html',
-  styleUrls: ['./edit-user-subjects.component.css'],
+  selector: 'app-edit-student-subjects',
+  templateUrl: './edit-student-subjects.component.html',
+  styleUrls: ['./edit-student-subjects.component.css'],
 })
-export class EditUserSubjectsComponent {
+export class EditStudentSubjectsComponent {
   faCircleDotIcon = faCircleDot;
 
   @Input() institutionId: string = '';
@@ -43,7 +42,6 @@ export class EditUserSubjectsComponent {
   };
 
   subjects: UserSubject[] = [];
-  classrooms: UserClassroom[] = [];
 
   isSubmitting: boolean = false;
 
@@ -52,18 +50,13 @@ export class EditUserSubjectsComponent {
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
-    private userSubjectsService: TeacherSubjectsService,
-    private userClassroomsService: TeacherClassroomsService
+    private studentSubjectService: StudentSubjectsService
   ) {}
 
   ngOnInit() {
-    this.userSubjectsService.subjects$.subscribe((subjects: UserSubject[]) => {
-      this.subjects = subjects;
-    });
-
-    this.userClassroomsService.classrooms$.subscribe(
-      (classrooms: UserClassroom[]) => {
-        this.classrooms = classrooms;
+    this.studentSubjectService.subjects$.subscribe(
+      (subjects: UserSubject[]) => {
+        this.subjects = subjects;
       }
     );
   }
@@ -107,7 +100,7 @@ export class EditUserSubjectsComponent {
                       subjectName: this.subject.name,
                     });
 
-                    this.userSubjectsService.updateSubjects(this.subjects);
+                    this.studentSubjectService.updateSubjects(this.subjects);
 
                     this.isSubmitting = false;
                     this.addSubjectsForm.reset();
@@ -128,17 +121,11 @@ export class EditUserSubjectsComponent {
   }
 
   onRemove(subject: UserSubject): void {
-    this.classrooms = this.classrooms.filter(
-      (classroom) => classroom.gradeId !== subject.gradeId
-    );
-
-    this.userClassroomsService.updateClassrooms(this.classrooms);
-
     const index = this.subjects.indexOf(subject);
     if (index !== -1) {
       this.subjects.splice(index, 1);
     }
 
-    this.userSubjectsService.updateSubjects(this.subjects);
+    this.studentSubjectService.updateSubjects(this.subjects);
   }
 }

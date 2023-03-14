@@ -8,8 +8,8 @@ import { UserClassroom } from 'src/app/models/user-classroom-model';
 import { UserSubject } from 'src/app/models/user-subject-model';
 
 import { CurrentTeacherServiceService } from 'src/app/services/current-teacher-service.service';
-import { UserClassroomsService } from 'src/app/services/user-classrooms.service';
-import { UserSubjectsService } from 'src/app/services/user-subjects.service';
+import { TeacherClassroomsService } from 'src/app/services/teacher-classrooms.service';
+import { TeacherSubjectsService } from 'src/app/services/teacher-subjects.service';
 
 interface TeacherDiff {
   [key: string]: string | string[];
@@ -57,8 +57,8 @@ export class TeacherComponent {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private currentTeacherServiceService: CurrentTeacherServiceService,
-    private userClassroomsService: UserClassroomsService,
-    private userSubjectsService: UserSubjectsService
+    private userClassroomsService: TeacherClassroomsService,
+    private userSubjectsService: TeacherSubjectsService
   ) {}
 
   ngOnInit() {
