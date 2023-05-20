@@ -1,0 +1,247 @@
+<app-navbar-simple></app-navbar-simple>
+<section>
+  <div class="container mt-5">
+    <div
+      class="shadow-sm p-5 mt-3 mb-3 card"
+      style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 1rem"
+    >
+      <a
+        class="text-white btn fw-bolder button-red bg-black"
+        href="/webdocs"
+        style="width: 100%"
+      >
+        School Management
+      </a>
+      <a
+        class="text-white btn fw-bolder button-red bg-black"
+        href="/desktopdocs"
+        style="width: 100%"
+      >
+        Interactive Learning
+      </a>
+    </div>
+    <h1 class="fw-bolder">Interactive Learning Platform Documentation</h1>
+    <div class="shadow-sm p-5 mt-3 card">
+      <h3 class="mb-3 fw-bold">Introduction</h3>
+      <p class="" style="font-size: 20px">
+        Welcome to the user documentation for the Interactive Learning Platform
+        Desktop Application! This comprehensive guide will walk you through the
+        features and functionalities of the application, designed to facilitate
+        interactive learning experiences for both teachers and students. Whether
+        you are an educator or a student, this documentation will provide you
+        with the necessary information to navigate and make the most of the
+        application. Let's get started!
+      </p>
+    </div>
+    <div class="shadow-sm p-5 mt-3 card">
+      <h3 class="mb-3 fw-bold">Login</h3>
+      <p class="" style="font-size: 20px">
+        Upon downloading the application, users are required to log in using
+        their institution name, user type (teacher or student), username, and
+        password. This step ensures secure access to the application's features
+        and personalized dashboards. Teacher users will be directed to the
+        teacher dashboard, while student users will access the student
+        dashboard.
+      </p>
+    </div>
+    <div class="shadow-sm p-5 mt-3 card">
+      <h3 class="mb-3 fw-bold">Teacher Dashboard</h3>
+      <p class="" style="font-size: 20px">
+        The teacher dashboard serves as a centralized hub for teachers to
+        customize their institution's environment. The dashboard consists of two
+        main windows: "Classrooms" and "Subjects."
+      </p>
+      <h5 class="mb-3 fw-bold">Classrooms</h5>
+      <p class="" style="font-size: 20px">
+        In the "Classrooms" window, teachers can access relevant information
+        about their assigned classrooms. The left side of the tab features the
+        classroom tab, displaying the classrooms and their respective students.
+        Teachers can navigate between classrooms using the next and back
+        buttons. Clicking on a student in the classroom tab reveals their
+        information in the details tab on the right side of the classroom
+        window.
+      </p>
+      <img
+        class="mb-4 mt-4"
+        src="../../assets/images/Teacher Classroom.png"
+        alt="dashboard"
+        style="height: 500px; width: auto; margin: auto"
+      />
+      <p class="" style="font-size: 20px">
+        The details tab comprises three elements:
+      </p>
+      <img
+        class="mb-4 mt-4"
+        src="../../assets/images/Teacher Classroom Results.png"
+        alt="dashboard"
+        style="height: 500px; width: auto; margin: auto"
+      />
+      <ul>
+        <li>
+          User Details: Displays the student's name and contact information.
+        </li>
+        <li>
+          Student Results: Showcases the student's overall results for all
+          subjects, including the total score and average up to the current
+          date.
+        </li>
+        <li>
+          Activity Results: Displays results for each activity the student has
+          participated in, categorized by subjects and topics. It includes the
+          subtopic name, final score, duration, and a list of scores and
+          durations for each level in the activity.
+        </li>
+      </ul>
+      <h5 class="mb-3 fw-bold">Subjects</h5>
+      <p class="" style="font-size: 20px">
+        The "Subjects" window provides comprehensive data about the subjects
+        assigned to the teacher. The left side features the subject tab,
+        displaying the subjects and topics. Teachers can switch between subjects
+        using this tab. On the right side, the subtopic tab displays all the
+        subtopics related to the selected topic. It presents the subtopic's
+        name, description, and instructions.
+      </p>
+      <img
+        class="mb-4 mt-4"
+        src="../../assets/images/Teacher Subjets.png"
+        alt="dashboard"
+        style="height: 500px; width: auto; margin: auto"
+      />
+      <p class="" style="font-size: 20px">
+        The window also includes three buttons:
+      </p>
+      <ul>
+        <li>
+          New: Allows teachers to create a new activity for the selected
+          subtopic.
+        </li>
+        <li>Test: Enables teachers to test the created activity.</li>
+        <li>Submit: Allows teachers to submit the activity after testing.</li>
+      </ul>
+    </div>
+    <div class="shadow-sm p-5 mt-3 card">
+      <h3 class="mb-3 fw-bold">Editor</h3>
+      <p class="" style="font-size: 20px">
+        The Editor is a powerful tool within the application that empowers
+        teachers to design and develop interactive activities in the form of
+        games. It offers a range of pre-built templates and customizable options
+        to create engaging educational experiences. The Editor window consists
+        of several interconnected tabs that facilitate the creation process.
+      </p>
+      <img
+        class="mb-4 mt-4"
+        src="../../assets/images/Editor Object.png"
+        alt="dashboard"
+        style="height: 500px; width: auto; margin: auto"
+      />
+      <h5 class="mb-3 fw-bold">Game Object:</h5>
+      <p class="" style="font-size: 20px">
+        A Game Object is an object that can be customized to display an image.
+        It has properties such as position, scale, and rotation within the
+        scene. The image of the object can have various colors and can include
+        text. Game Objects can also have physics behaviors and animations.
+      </p>
+      <h5 class="mb-3 fw-bold">Level:</h5>
+      <p class="" style="font-size: 20px">
+        A Level is a fundamental component of a game within the Editor. The game
+        can have multiple levels, each generated using a pre-built template.
+        Levels contain Game Objects that interact with the mechanics defined by
+        the template. There are two types of Game Objects in a level: Template
+        Objects, necessary for running the template mechanics, and Custom
+        Objects, created by users to represent specific elements within the
+        scene. Levels have conditions that define the logic of the template
+        mechanics and triggers associated with specific components of objects in
+        the scene.
+      </p>
+      <img
+        class="mb-4 mt-4"
+        src="../../assets/images/Editor Level.png"
+        alt="dashboard"
+        style="height: 500px; width: auto; margin: auto"
+      />
+      <h5 class="mb-3 fw-bold">Toolbar:</h5>
+      <p class="" style="font-size: 20px">
+        The Toolbar contains four buttons that assist with the project::
+      </p>
+      <ul>
+        <li>New Object: Generates a new Game Object in the scene.</li>
+        <li>New Level: Creates an empty level template.</li>
+        <li>Save: Saves the progress of the project.</li>
+        <li>Exit: Allows users to exit the Editor.</li>
+      </ul>
+      <h5 class="mb-3 fw-bold">Scene View:</h5>
+      <p class="" style="font-size: 20px">
+        The Scene View provides a visual display of the objects within the
+        current level. Users can zoom in and out and pan around the scene to
+        position objects correctly within the frame.
+      </p>
+      <h5 class="mb-3 fw-bold">Hierarchy:</h5>
+      <p class="" style="font-size: 20px">
+        The Hierarchy tab displays the objects of the selected level within the
+        scene. It consists of two lists: the Template list, showing objects
+        generated by the level template, and the Object list, displaying custom
+        objects created by the user. Users can select objects from the Hierarchy
+        tab to customize their properties.
+      </p>
+      <h5 class="mb-3 fw-bold">Levels Tab:</h5>
+      <p class="" style="font-size: 20px">
+        The Levels tab provides an overview of the current levels in the game
+        and their properties. Users can select and modify level settings, delete
+        levels, and manage triggers associated with each level.
+      </p>
+      <h5 class="mb-3 fw-bold">Inspector:</h5>
+      <p class="" style="font-size: 20px">
+        The Inspector tab displays and updates the custom settings of a selected
+        level template, trigger, or game object. Users can choose a level,
+        object, or trigger and customize the corresponding settings. The
+        Inspector provides detailed customization options for each element.
+      </p>
+      <h5 class="mb-3 fw-bold">Object Settings:</h5>
+      <p class="" style="font-size: 20px">
+        The Object Settings section within the Inspector allows users to
+        customize various components of a game object, such as Transform, Image,
+        Text, Physics, and Animation. These settings define the object's
+        properties and behavior within the game environment.
+      </p>
+      <h5 class="mb-3 fw-bold">Level Settings:</h5>
+      <p class="" style="font-size: 20px">
+        When creating a new level, users can configure its settings in the Level
+        Settings section. Users can select the template type (quiz or puzzle),
+        specify the question, choose the puzzle type (select or drag and drop),
+        and customize additional settings based on the chosen template type.
+      </p>
+      <h5 class="mb-3 fw-bold">Assets:</h5>
+      <p class="" style="font-size: 20px">
+        When creating a new level, users can configure its settings in the Level
+        Settings section. Users can select the template type (quiz or puzzle),
+        specify the question, choose the puzzle type (select or drag and drop),
+        and customize additional settings based on the chosen template type.
+      </p>
+    </div>
+    <div class="shadow-sm p-5 mt-3 mb-3 card">
+      <h3 class="mb-3 fw-bold">Student Dashboard</h3>
+      <p class="" style="font-size: 20px">
+        The student dashboard serves as a centralized hub for students to access
+        their assigned interactive activities and view their results. The
+        dashboard consists of two main windows: "Results" and "Subjects."
+      </p>
+      <h5 class="mb-3 fw-bold">Results:</h5>
+      <p class="" style="font-size: 20px">
+        In the "Results" window, students can access relevant information about
+        their performance. The left side of the tab features the classroom tab,
+        displaying the classroom. Clicking on a student in the classroom tab
+        reveals their information in the details tab on the right side of the
+        results window, similar to the teacher dashboard.
+      </p>
+      <h5 class="mb-3 fw-bold">Subjects:</h5>
+      <p class="" style="font-size: 20px">
+        The "Subjects" window provides comprehensive data about the subjects
+        assigned to the student. Students can switch between subjects using the
+        subject tab. On the right side, the subtopic tab displays all the
+        subtopics related to the selected topic. It presents the subtopic's name
+        and description. The window also includes a "Play" button, allowing
+        students to access and play the assigned game activities.
+      </p>
+    </div>
+  </div>
+</section>

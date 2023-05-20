@@ -60,6 +60,10 @@ import { EditUserClassroomsComponent } from './components/edit-user-classrooms/e
 import { EditUserSubjectsComponent } from './components/edit-user-subjects/edit-user-subjects.component';
 import { InstitutionDataComponent } from './components/institution-data/institution-data.component';
 import { EditStudentSubjectsComponent } from './components/edit-student-subjects/edit-student-subjects.component';
+import { DocsComponent } from './docs/docs.component';
+import { NavbarSimpleComponent } from './components/navbar-simple/navbar-simple.component';
+import { WebDocsPageComponent } from './web-docs-page/web-docs-page.component';
+import { DesktopDocsPageComponent } from './desktop-docs-page/desktop-docs-page.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +120,10 @@ import { EditStudentSubjectsComponent } from './components/edit-student-subjects
     EditUserSubjectsComponent,
     InstitutionDataComponent,
     EditStudentSubjectsComponent,
+    DocsComponent,
+    NavbarSimpleComponent,
+    WebDocsPageComponent,
+    DesktopDocsPageComponent,
   ],
   imports: [
     BrowserModule,
